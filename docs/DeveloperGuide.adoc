@@ -836,12 +836,12 @@ _{More to be added}_
 [appendix]
 == Use Cases
 
-(For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
+(For all use cases below, the System is the AddressBook and the Actor is the user, unless specified otherwise)
 
 [discrete]
 === Use case: Delete person
 
-*MSS*
+MSS
 
 1.  User requests to list persons
 2.  AddressBook shows a list of persons
@@ -850,7 +850,7 @@ _{More to be added}_
 +
 Use case ends.
 
-*Extensions*
+Extensions
 
 [none]
 * 2a. The list is empty.
@@ -864,8 +864,44 @@ Use case ends.
 +
 Use case resumes at step 2.
 
-_{More to be added}_
+[discrete]
+=== Use case: To Split a Bill Among Multiple People
 
+MSS
+
+1.  User requests to new a bill
+2.  AddressBook shows the new bill
+3.  User requests selects who the bill will be splited among
+4.  AddressBook shows who the bill will be splited among in the contact details
++
+Use case ends.
+
+Extensions
+
+* 1a. Specified people does not exist.
++
+[none]
+** 1a1. AddressBook shows an error message.
++
+Use case resumes at step 2.
+
+[discrete]
+=== Use case: To See Who Owes Me Money
+
+MSS
+
+1.  User requests to see people who owes the user Money
+2.  AddressBook shows the list of people
++
+Use case ends.
+
+Extensions
+
+* 1a. No people owe the user money.
++
+[none]
+** 1a1. AddressBook shows an message showing that the list is empty.
++
 [appendix]
 == Non Functional Requirements
 
