@@ -244,12 +244,12 @@ TravelBanker data are saved in the hard disk automatically after any command tha
 There is no need to save manually.
 
 // tag::dataencryption[]
-=== Encrypting data files `[coming in v2.0]`
+=== Encrypting data files `[Coming in v2.0]`
 
 _{explain how the user can enable/disable data encryption}_
 // end::dataencryption[]
 
-=== Checking overall balance: `balance` or `b`
+=== Checking overall balance: `balance` or `b` `[Coming in v2.0]`
 
 Calculates your total balance. +
 Format: `balance` or `b`
