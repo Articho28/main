@@ -119,10 +119,10 @@ public class AddressBookParser {
             return new RedoCommand();
 
         case BalanceCommand.COMMAND_SHORTCUT:
-            return new ListCommand();
+            return new BalanceCommand();
 
         case BalanceCommand.COMMAND_WORD:
-            return new ListCommand();
+            return new BalanceCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
