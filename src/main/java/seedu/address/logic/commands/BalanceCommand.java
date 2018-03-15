@@ -29,7 +29,8 @@ public class BalanceCommand extends Command {
             double currentPersonBalance = person.getMoney().balance;
             accumulator = accumulator + currentPersonBalance;
         }
+        calculatedBalance = accumulator;
         System.out.println(accumulator);
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult("Your balance is " + Double.toString(calculatedBalance) + ".");
     }
 }
