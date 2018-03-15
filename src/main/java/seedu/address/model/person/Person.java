@@ -21,7 +21,6 @@ public class Person {
     private final Email email;
     private final Address address;
     private final Money money;
-
     private final UniqueTagList tags;
 
     /**
