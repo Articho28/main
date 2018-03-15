@@ -254,6 +254,11 @@ _{explain how the user can enable/disable data encryption}_
 Calculates your total balance. +
 Format: `balance` or `b`
 
+=== Converts your balance in a desired currency: `balance c/` or `b c/` [Coming in v2.0]`
+
+Converts your total balance in a currency of your choice.
+Format `balance c/` or `b c/[CURRENCY]`
+
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
