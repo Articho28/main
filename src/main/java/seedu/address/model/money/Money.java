@@ -11,7 +11,7 @@ public class Money {
     public static final String MESSAGE_MONEY_CONSTRAINTS = "Money values should be numbers";
     public static final String MONEY_VALIDATION_REGEX = "-?\\d+(\\.\\d+)?";
 
-    public final Double balance;
+    public final double balance;
     public final String value;
 
     /**
