@@ -281,16 +281,16 @@ Format: `lent` or `le`
 Lists all the contacts that owe you an amount.
 Format: `debt` or `de`
 
-=== Converts your balance in a desired currency: `balance c/` or `b c/` [Coming in v2.0]`
+=== Converts your balance in a desired currency: `currency c/` or `cu c/` [Coming in v2.0]`
 
 Converts your total balance in a currency of your choice.
-Format: `balance c/` or `b c/[CURRENCY]`
+Format: `balance c/[CURRENCY]` or `b c/[CURRENCY]`
 
 === Lists a description of the debts someone owes you: `describe` or `db` [Coming in v2.0]
 
 Lists the description consisting of keywords that explain why someone owes you an amount.
 This facilitates understanding of the debt.
-Format: `describe [INDEX]`
+Format: `describe INDEX`
 
 =======
 
@@ -319,3 +319,10 @@ e.g.`select 2`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
+* *Max* : `max`
+* *Min* : `min`
+* *Describe* : `describe INDEX`
+e.g. `describe 3`
+* *Currency* : `currency c/`
+e.g. `currency c/USD`
+
