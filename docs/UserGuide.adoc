@@ -281,10 +281,16 @@ Format: `lent` or `le`
 Lists all the contacts that owe you an amount.
 Format: `debt` or `de`
 
+=== Applies an interest rate to your balance: `interest FACTOR` or `i FACTOR`
+
+Displays your balance with an applied interest rate.
+Format: `interest FACTOR` or `i FACTOR`
+
 === Converts your balance in a desired currency: `currency c/` or `cu c/` [Coming in v2.0]`
 
 Converts your total balance in a currency of your choice.
 Format: `balance c/[CURRENCY]` or `b c/[CURRENCY]`
+
 
 === Lists a description of the debts someone owes you: `describe` or `db` [Coming in v2.0]
 
