@@ -359,9 +359,10 @@ image::UndoRedoActivityDiagram.png[width="650"]
 // end::undoredo[]
 
 // tag::dataencryption[]
-=== [Proposed] Data Encryption
-
-_{Explain here how the data encryption feature will be implemented}_
+=== Balance Feature
+The balance feature is implemented by the `BalanceCommand` class, which resides in the `Logic` component.
+It extends the Command class and is not an undoable or re-doable command, similar to `list`. The balance command relies on
+the incorporation of the [MONEY] field, which stores 
 
 // end::dataencryption[]
 
