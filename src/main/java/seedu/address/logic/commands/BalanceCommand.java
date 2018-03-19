@@ -29,6 +29,6 @@ public class BalanceCommand extends Command {
         calculatedBalance = accumulator;
 
 
-        return new CommandResult("Your balance is " + FORMAT_TWO_DECIMAL_PLACES.format(calculatedBalance) + ".");
+        return new CommandResult(MESSAGE_SUCCESS + "\n" + "Your balance is " + FORMAT_TWO_DECIMAL_PLACES.format(calculatedBalance) + ".");
     }
 }
