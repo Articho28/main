@@ -816,6 +816,9 @@ financial situation. The min and max commands contribute to this goal by listing
 This is important to the product as it aims to be quick and efficient. Shortcuts for every command (except exit to
  avoid accidents) allows for a quicker and smoother user experience, thus making book-keeping quick and easy.
 
+** *Minor Enhancement*: modifying the select command to automatically search for a nearby atm when a contact is loaded.
+This aims to help the user find ways to settle his finances quickly and efficiently.
+
 [appendix]
 == User Stories
 
