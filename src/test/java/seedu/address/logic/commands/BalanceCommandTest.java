@@ -16,7 +16,7 @@ public class BalanceCommandTest {
     private Model model;
     private Model expectedModel;
     private BalanceCommand balanceCommand;
-
+    private double balance;
 
 
     @Before
@@ -25,11 +25,11 @@ public class BalanceCommandTest {
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         balanceCommand = new BalanceCommand();
         balanceCommand.setData(model, new CommandHistory(), new UndoRedoStack());
+        balance = balanceCommand.getBalanceFromTravelBanker();
     }
 
     @Test
     public void executes_getsOverallBalanceSuccess() {
-        double balance = balanceCommand.getBalanceFromTravelBanker();
         assertCommandSuccess(balanceCommand, model,  BalanceCommand.MESSAGE_SUCCESS
                 + "\n" + "Your balance is "
                 + BalanceCommand.FORMAT_TWO_DECIMAL_PLACES.format(balance)
