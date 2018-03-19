@@ -790,17 +790,31 @@ See this https://github.com/se-edu/TravelBanker-level4/pull/599[PR] for the step
 * has a need to manage finances with fellow contacts
 * has a need to keep track of personal balance
 * has a need to keep track of transactions between contacts
-* travels with a group and lends money/borrows money.
+* travels with a group and lends money/borrows money
+* has a need of finding nearby financial institutions to repay contacts.
 
 *Value proposition*:
 
 * manage contacts faster than a typical mouse/GUI driven app
-* easily keep track of balances and debts between contacts
-* easily see your overall balance
-* easily see contacts that owe you money
-* easily see contacts to which you are in debt
-* easily keep track of transactions between contacts
-* easily update balance once debts are paid
+* manage your informal financial transactions accurately than relying on memory.
+* manage your finances in a more organized manner than relying on a text-editing app, spreadsheet, or memory.
+* update your cumulative total automatically, which removes the need of re-adding the numbers every time a new transaction is added,
+as seen in traditional book-keeping methods.
+* find a nearby ATM as soon as a contact is loaded, which removes the need to switch apps when wanting to settle a debt.
+* list the contacts that owe you money or to which you owe money, thus removing the need to manually filter out the contacts you are looking for.
+
+== Feature Contribution
+
+* *Artsiom Skliar*
+** *Major Enhancement*: incorporating balance, min, and max command, which calculates your overall balance as registered in TravelBanker.
+This value will tell the user if he owes more money than he's borrowed or vice-versa. This is essential to the product as
+TravelBanker relies on the need of the user to keep track of his informal finances efficiently and accurately.
+The ability to see view your overall balance is thus necessary as it provides insight to the user on his general
+financial situation. The min and max commands contribute to this goal by listing the largest amounts owed and lent.
+
+** *Minor Enhancement*: created aliases for every command received by TravelBanker to increase its efficiency.
+This is important to the product as it aims to be quick and efficient. Shortcuts for every command (except exit to
+ avoid accidents) allows for a quicker and smoother user experience, thus making book-keeping quick and easy.
 
 [appendix]
 == User Stories
