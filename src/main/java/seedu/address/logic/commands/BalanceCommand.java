@@ -8,7 +8,7 @@ public class BalanceCommand extends Command {
 
     public static final String COMMAND_WORD = "balance";
     public static final String COMMAND_SHORTCUT = "b";
-    private static DecimalFormat FORMAT_TWO_DECIMAL_PLACES = new DecimalFormat(".00");
+    private static DecimalFormat FORMAT_TWO_DECIMAL_PLACES = new DecimalFormat("0.00");
 
     public static final String MESSAGE_SUCCESS = "Shown balance.";
 
