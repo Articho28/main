@@ -13,6 +13,7 @@ public class BalanceCommand extends Command {
     public static final String COMMAND_WORD = "balance";
     public static final String COMMAND_SHORTCUT = "b";
     public static final String MESSAGE_SUCCESS = "Shown balance.";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + "Displays your overall balance";
     private static double calculatedBalance;
     private static DecimalFormat twoDecimalPlaces = new DecimalFormat("0.00");
 
