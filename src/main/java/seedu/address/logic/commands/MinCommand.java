@@ -18,7 +18,15 @@ public class MinCommand extends Command {
     public static final String MESSAGE_SUCCESS_FOUND = "The contact to which you owe the most money is: ";
     public static final String MESSAGE_SUCCESS_NO_RESULT = "Good news! You don't owe any money.";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds the person to which you owe the most money ";
-    public CommandResult result;
+    private CommandResult result;
+
+    public CommandResult getResult() {
+        return result;
+    }
+
+    public void setResult(CommandResult result) {
+        this.result = result;
+    }
 
     @Override
     public CommandResult execute() {
@@ -32,15 +40,14 @@ public class MinCommand extends Command {
                 index = Index.fromZeroBased(i);
                 lowestDebt = person.getMoney().balance;
             }
-            if(lowestDebt == 0.0)  {
+
+            if (lowestDebt == 0.0) {
                 result = new CommandResult(MESSAGE_SUCCESS_NO_RESULT);
-            }
-            else {
+            } else {
                 EventsCenter.getInstance().post(new JumpToListRequestEvent(index));
                 result = new CommandResult(MESSAGE_SUCCESS_FOUND + lastShownList.get(index.getZeroBased()).getName());
             }
         }
-        
         return result;
     }
 }
