@@ -365,12 +365,13 @@ It extends the Command class and is not an undoable or re-doable command, simila
 the incorporation of the [MONEY] field, which stores the amount that a specific contact owes to the user,
 or the amount the user owes to the said contact if the balance is negative.
 
-THe following class diagram shows shows where where the BalanceCommand is implemented.
+The following class diagram shows shows where where the BalanceCommand is implemented.
 
 image::BalanceCommand - Class Diagram.png[width="800"]
 
 The following sequence diagram shows how the `balance` command works.
 
+image::BalanceCommandSequenceDiagram.png[width="800"]
 
 
 
