@@ -423,6 +423,12 @@ this method is not applicable.
 * **Cons**: More difficult to implement and not much value added.
 // end::balancefeature[]
 
+// tag::dataencryption[]
+=== [Proposed] Data Encryption
+
+_{Explain here how the data encryption feature will be implemented}_
+
+// end::dataencryption[]
 === Logging
 
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels and logging destinations.
