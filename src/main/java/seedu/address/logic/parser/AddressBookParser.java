@@ -18,6 +18,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MaxCommand;
+import seedu.address.logic.commands.MinCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.RemoveTagCommand;
 import seedu.address.logic.commands.SelectCommand;
@@ -137,6 +138,12 @@ public class AddressBookParser {
 
         case MaxCommand.COMMAND_SHORTCUT:
             return new MaxCommand();
+
+        case MinCommand.COMMAND_WORD:
+            return new MinCommand();
+
+        case MinCommand.COMMAND_SHORTCUT:
+           return new MinCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

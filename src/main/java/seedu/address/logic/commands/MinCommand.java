@@ -12,9 +12,9 @@ public class MinCommand extends Command {
 
     public static final String COMMAND_WORD = "min";
     public static final String COMMAND_SHORTCUT = "mn";
-    public static final String MESSAGE_SUCCESS = "The contact who owes you the most money is: ";
+    public static final String MESSAGE_SUCCESS = "The contact to which you owe the most money is: ";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds the person that owes the most money ";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds the person to which you owe the most money ";
 
     @Override
     public CommandResult execute() {
