@@ -15,15 +15,16 @@ public class MinCommand extends Command {
 
     public static final String COMMAND_WORD = "min";
     public static final String COMMAND_SHORTCUT = "mn";
-    public static final String MESSAGE_SUCCESS = "The contact to which you owe the most money is: ";
-
+    public static final String MESSAGE_SUCCESS_FOUND = "The contact to which you owe the most money is: ";
+    public static final String MESSAGE_SUCCESS_NO_RESULT = "Good news! You don't owe any money.";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds the person to which you owe the most money ";
+    public CommandResult result;
 
     @Override
     public CommandResult execute() {
         List<Person> lastShownList = model.getFilteredPersonList();
         Index index = Index.fromZeroBased(0);
-        double lowestDebt = lastShownList.get(0).getMoney().balance;
+        double lowestDebt = 0.0;
 
         for (int i = 0; i < lastShownList.size(); i++) {
             Person person = lastShownList.get(i);
@@ -31,9 +32,15 @@ public class MinCommand extends Command {
                 index = Index.fromZeroBased(i);
                 lowestDebt = person.getMoney().balance;
             }
+            if(lowestDebt == 0.0)  {
+                result = new CommandResult(MESSAGE_SUCCESS_NO_RESULT);
+            }
+            else {
+                EventsCenter.getInstance().post(new JumpToListRequestEvent(index));
+                result = new CommandResult(MESSAGE_SUCCESS_FOUND + lastShownList.get(index.getZeroBased()).getName());
+            }
         }
-
-        EventsCenter.getInstance().post(new JumpToListRequestEvent(index));
-        return new CommandResult(MESSAGE_SUCCESS + lastShownList.get(index.getZeroBased()).getName());
+        
+        return result;
     }
 }
