@@ -262,7 +262,7 @@ There is no need to save manually.
 _{explain how the user can enable/disable data encryption}_
 // end::dataencryption[]
 
-=== Checking overall balance: `balance` or `b`
+=== Checking overall balance: `balance` or `b` [Since v1.2]
 
 Calculates your total balance. +
 Format: `balance` or `b`
@@ -287,7 +287,7 @@ Format: `lent` or `le`
 Lists all the contacts that owe you an amount.
 Format: `debt` or `de`
 
-=== Applies an interest rate to your balance: `interest FACTOR` or `i FACTOR`
+=== Applies an interest rate to your balance: `interest FACTOR` or `i FACTOR` [Coming in v2.0]
 
 Displays your balance with an applied interest rate.
 Format: `interest FACTOR` or `i FACTOR`
