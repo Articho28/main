@@ -27,7 +27,6 @@ public class MinCommand extends Command {
     public void setResult(CommandResult result) {
         this.result = result;
     }
-    
     @Override
     public CommandResult execute() {
         List<Person> lastShownList = model.getFilteredPersonList();
