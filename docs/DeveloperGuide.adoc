@@ -358,7 +358,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two * different things.
 // end::undoredo[]
 
-// tag::dataencryption[]
+// tag::balancefeature[]
 === Balance Feature
 The balance feature is implemented by the `BalanceCommand` class, which resides in the `Logic` component.
 It extends the Command class and is not an undoable or re-doable command, similar to `list`. The balance command relies on
@@ -369,13 +369,35 @@ The following class diagram shows shows where where the BalanceCommand is implem
 
 image::BalanceCommand - Class Diagram.png[width="800"]
 
+Commands that cannot be undone such as BalanceCommand are implemented like this:
+
+[source,java]
+----
+public class ListCommand extends Command {
+    @Override
+    public CommandResult execute() {
+        // ... list logic ...
+    }
+}
+----
+
 The following sequence diagram shows how the `balance` command works.
 
 image::BalanceCommandSequenceDiagram.png[width="800"]
 
+Suppose that the user just launched the application. The TravelBanker will load his contacts and the amount of money owed by/to each
+will be shown to the screen. The user simply types `balance` or `b`, which will be interpreted by the TravelBook Parser.
+Once the command is parsed, it will return a new `BalanceCommand`, which `LogicManager` will call `command`. `LogicManager` will
+then call the execute() function on command. This method calls on `getBalancefromTravelBanker` gets a `Persons` list through `model`,
+and thus gets to manipulate the values in the `m/[MONEY]` field of the current accounting book. It then adds all of them
+and displays to the feedback to the user by returning a `CommandResult` with the found data as argument.
+
+The following activity diagram summarizes the execution of the `balance` command.
+
+image::BalanceCommandActivityDiagram.png[width="800"]
 
 
-// end::dataencryption[]
+// end::balancefeature[]
 
 === Logging
 
