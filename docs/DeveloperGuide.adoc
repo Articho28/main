@@ -362,7 +362,17 @@ image::UndoRedoActivityDiagram.png[width="650"]
 === Balance Feature
 The balance feature is implemented by the `BalanceCommand` class, which resides in the `Logic` component.
 It extends the Command class and is not an undoable or re-doable command, similar to `list`. The balance command relies on
-the incorporation of the [MONEY] field, which stores 
+the incorporation of the [MONEY] field, which stores the amount that a specific contact owes to the user,
+or the amount the user owes to the said contact if the balance is negative.
+
+THe following class diagram shows shows where where the BalanceCommand is implemented.
+
+image::BalanceCommand - Class Diagram.png[width="800"]
+
+The following sequence diagram shows how the `balance` command works.
+
+
+
 
 // end::dataencryption[]
 
@@ -807,7 +817,7 @@ as seen in traditional book-keeping methods.
 == Feature Contribution
 
 * *Artsiom Skliar*
-** *Major Enhancement*: incorporating balance, min, and max command, which calculates your overall balance as registered in TravelBanker.
+** *Major Enhancement*: incorporating balance and min commands, which calculates your overall balance as registered in TravelBanker.
 This value will tell the user if he owes more money than he's borrowed or vice-versa. This is essential to the product as
 TravelBanker relies on the need of the user to keep track of his informal finances efficiently and accurately.
 The ability to see view your overall balance is thus necessary as it provides insight to the user on his general
