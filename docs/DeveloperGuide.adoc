@@ -365,6 +365,120 @@ _{Explain here how the data encryption feature will be implemented}_
 
 // end::dataencryption[]
 
+// tag::moneyfield[]
+=== Add/Edit Money Field
+
+==== Current Implementation
+
+The implementation of the money field spanned four components: Model, Logic, Storage and UI.
+
+===== Model
+
+In terms of the Model component, a new Money model was created and the Person and Addressbook models required modifications to integrate the new Money model. The Money model was written to be consistent with the existing Person attribute models like "Email" and "Phone".
+
+A class diagram of the models can be seen below:
+
+image::MoneyClassDiagram.png[width="800"]
+
+The most important part of the Money model is the constructor:
+
+[source,java]
+----
+public Money(String balance) {
+    requireNonNull(balance);
+    checkArgument(isValidMoney(balance), MESSAGE_MONEY_CONSTRAINTS);
+    this.balance = Double.parseDouble(balance);
+    this.value = balance;
+}
+----
+
+The constructor was implemented using two properties: `Double balance` and `String value`
+This is because the money value is often used as a string for display and as a double for calculations and comparisons.
+The trade-off here was to either store it as just a Double or a String, and cast the value into the right type when needed, or store the value as both a Double and a String.
+The first option forgoes time performance to provide better space performance and keep one single source of truth for each Money object. The second option however provides better time performance, but falls short on space and source of truth data integrity.
+Our team decided to take the second option as data integrity issues can be mitigated through comprehensive testing, and because time performance is more important than space complexity at this point time.
+
+The other notable parts of the Money model are the validation checking function `isValidMoney` and the `equals` function.
+
+The `isValidMoney` function is used to make sure that the user input conforms to the regex for a number:
+
+[source,java]
+----
+public static boolean isValidMoney(String test) {
+    return test.matches(MONEY_VALIDATION_REGEX);
+}
+----
+
+The `equals` function is mostly used for testing, and provides a way to check if two Money objects have equal values.
+The function makes sure that the objects are of the same type, and share the same `value` property:
+
+[source,java]
+----
+public boolean equals(Object other) {
+    return other == this // short circuit if same object
+            || (other instanceof Money // instanceof handles nulls
+            && this.value.equals(((Money) other).value)); // state check
+}
+----
+
+There were also small modifications to the AddressBook and Person models. These changes mainly have to do with adding Money as a property of Person, and making sure the getters and setters work appropriately for that property.
+
+===== Logic
+
+In the context of the Logic component, the "add" and "edit" components had to be modified. In addition, some parser logic had to be modified in order to work with the new money parameter.
+To be more specific, one of the major changes here was the `parseMoney` function which is used to parse the input from the user into a Money object:
+
+[source,java]
+----
+public static Money parseMoney(String money) throws IllegalValueException {
+    requireNonNull(money);
+    String trimmedMoney = money.trim();
+    if (!Money.isValidMoney(trimmedMoney)) {
+        throw new IllegalValueException(Money.MESSAGE_MONEY_CONSTRAINTS);
+    }
+    return new Money(trimmedMoney);
+}
+----
+
+[NOTE]
+In this implmentation, if an invalid input is received for the money parameter, which is anything that isn't a Double, an IllegalValueExcpetion is thrown.
+
+This implementation was chosen as to stay consistent with the rest of the existing fields. In other words, this `parseMoney` function is comparable to the `parseEmail` or `parsePhone` functions, in order to maintain consistency in parser logic.
+
+===== Storage
+
+Storage was also changed in the development of this feature, as a new parameter had to be stored and parsed using the xml storage system.
+
+The logic for parsing the stored data is very similar to the parsing logic for user input:
+
+[source,java]
+----
+if (!Money.isValidMoney(this.balance)) {
+    throw new IllegalValueException(Money.MESSAGE_MONEY_CONSTRAINTS);
+}
+final Money balance = new Money(this.balance);
+----
+
+Then this money object is used to create the Person object:
+
+[source,java]
+----
+return new Person(name, phone, email, address, balance, tags);
+----
+
+Again, this implementation was chosen to be consistent with the existing logic of parsing the stored xml.
+
+===== UI
+
+The changes in the UI were minor, and simply added the money field to the `PersonCard` UI component:
+
+[source,fxml]
+----
+<Label fx:id="money" styleClass="cell_small_label" text="\$money" />
+----
+
+// end::moneyfield[]
+
 === Logging
 
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels and logging destinations.
@@ -818,6 +932,32 @@ This is important to the product as it aims to be quick and efficient. Shortcuts
 
 ** *Minor Enhancement*: modifying the select command to automatically search for a nearby atm when a contact is loaded.
 This aims to help the user find ways to settle his finances quickly and efficiently.
+
+* *Eric Zhou*
+** *Major Enhancement*: incorporating various listing features which will can filter the list to list out people who owe you a negative amount or a positive amount.
+This is essential to the product as a user will be able to quickly see who owes them money or who they owe money to.
+The ability to quickly filter out the list important because in big lists, it might not be the easiest to see what each person owes. With the feature, it increases efficiency for large addressbooks.
+
+** *Minor Enhancement*: added negative value allowance for balance to allow people to see the total amount they owe or need to be paid.
+This is important to the product as people will not always just owe money, sometimes people might need to pay the user, this feature allows that to be accounted for.
+
+** *Minor Enhancement*: case insensitivty of commands.
+This aims to help add ease to the user because the user will not need to type commands in specific way so Add and add will both add a new person.
+
+* *Chen Chongsong*
+** *Major Enhancement*: implementing a SortCommand to sort contact list according to balance, name, etc.
+If name sorted, the user would be able to search for certain person quickly and alphebatically. This is useful because sometimes the user cannot remember the exact names, and therefore, fail to search names with the FindCommand.
+If balance sorted, the user would be enabled to decide the order of returning money in the future. For example, the user can choose to firstly return money to "small creditors" (because the user owes little money to them, and he can pay them off easily)
+
+** *Minor Enhancement*: created a new command to delete specified tags (RemoveTagCommand).
+This is important to the product, especially when the user wants to delete only one tag from a contact person who has many tags. Perviously, when using EditCommand to remove tags, the user needs to input all remaining tags. RemoveTagCommand, however, can be used by inputing the few tags that the user wants to delete. That improves efficiency to a great extent.
+
+* *Prian Kuhanandan*
+** *Major Enhancement*: Implementing the money field, and allowing for existing commands to use the field such as the add and edit commands.
+This is important because this allows for all the money related features that are essential to our use cases, such as the balance feature.
+
+** *Minor Enhancement*: Create a new command to identify the person that owes the user the most money.
+This is important to the product, because the user needs easy ways to interact with the money field that we have added. This is one minor way to use the field and will provide the user with a lot of value as it will help with locating his or her biggest debtor.
 
 [appendix]
 == User Stories

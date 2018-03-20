@@ -261,7 +261,7 @@ There is no need to save manually.
 Calculates your total balance. +
 Format: `balance` or `b`
 
-=== Seeing which contact owes you the most: `max` or `m`
+=== Seeing which contact owes you the most: `max` or `mx` [Since v1.2]
 
 Lists the contact which owes you the most money. +
 Format: `max`
@@ -285,6 +285,13 @@ Format: `debt` or `de`
 
 Displays your balance with an applied interest rate.
 Format: `interest FACTOR` or `i FACTOR`
+
+
+=== Identifies the person that owes the user the most money: `biggest-debtor` or `bd` [Since v1.2]
+
+Finds the person that owes the user the most money.
+Improves the usability by adding a quick access function for a common use case.
+Format: `biggest-debtor INDEX`
 
 === Converts your balance in a desired currency: `currency c/` or `cu c/` [Coming in v2.0]`
 
