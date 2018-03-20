@@ -1,9 +1,13 @@
 package seedu.address.logic.commands;
 
-import java.util.List;
 import java.text.DecimalFormat;
+import java.util.List;
+
 import seedu.address.model.person.Person;
 
+/**
+ * Handles the balance command.
+ */
 public class BalanceCommand extends Command {
 
     public static final String COMMAND_WORD = "balance";
@@ -12,7 +16,12 @@ public class BalanceCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Shown balance.";
 
-    public static double calculatedBalance;
+    private static double calculatedBalance;
+
+    public static double getCalculatedBalance() {
+        return calculatedBalance;
+    }
+    
 
     @Override
     public CommandResult execute() {
