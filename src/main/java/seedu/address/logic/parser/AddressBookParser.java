@@ -143,7 +143,7 @@ public class AddressBookParser {
             return new MinCommand();
 
         case MinCommand.COMMAND_SHORTCUT:
-           return new MinCommand();
+            return new MinCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

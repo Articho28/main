@@ -8,6 +8,9 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.model.person.Person;
 
+/**
+ * Finds the person to which you owe the most money
+ */
 public class MinCommand extends Command {
 
     public static final String COMMAND_WORD = "min";
