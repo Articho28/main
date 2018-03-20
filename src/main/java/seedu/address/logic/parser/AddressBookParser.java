@@ -131,7 +131,7 @@ public class AddressBookParser {
 
         case BalanceCommand.COMMAND_WORD:
             return new BalanceCommand();
-            
+
         case MaxCommand.COMMAND_WORD:
             return new MaxCommand();
 

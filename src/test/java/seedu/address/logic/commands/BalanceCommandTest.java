@@ -32,7 +32,7 @@ public class BalanceCommandTest {
     public void executes_getsOverallBalanceSuccess() {
         assertCommandSuccess(balanceCommand, model,  BalanceCommand.MESSAGE_SUCCESS
                 + "\n" + "Your balance is "
-                + BalanceCommand.FORMAT_TWO_DECIMAL_PLACES.format(balance)
+                + BalanceCommand.getFormatTwoDecimalPlaces().format(balance)
                 + ".", expectedModel);
     }
 
