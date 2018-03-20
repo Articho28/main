@@ -396,6 +396,23 @@ The following activity diagram summarizes the execution of the `balance` command
 
 image::BalanceCommandActivityDiagram.png[width="800"]
 
+==== Design Considerations
+
+===== Aspect: Making balance not an undoable or re-doable command.
+
+* **Alternative 1 (current choice) make `balance` not an undoable command**.
+
+* **Pros**: There was no need to make balance a re-doable or undoable command since it serves a purpose similar to `list`:
+it only displays information found in TravelBanker, but does not alter it. Thus, the user will not have any issues with this
+command should he make a mistake: it does not write any data.
+
+* ** Cons**: No significant disadvantage.
+
+* **Alternative 2: make `balance` an undoable command.**
+* **Pros**: No serious advantage, as explained in Alternative 1. Since the command does not aim to modify data,
+this method is not applicable.
+* **Cons**:  Extra layer of complexity that does not give any significant benefit
+
 
 // end::balancefeature[]
 
