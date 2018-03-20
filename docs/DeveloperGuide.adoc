@@ -400,7 +400,7 @@ image::BalanceCommandActivityDiagram.png[width="800"]
 
 ===== Aspect: Making balance not an undoable or re-doable command.
 
-* **Alternative 1 (current choice) make `balance` not an undoable command**.
+* **Alternative 1 (current choice)**: Make `balance` not an undoable command**.
 
 * **Pros**: There was no need to make balance a re-doable or undoable command since it serves a purpose similar to `list`:
 it only displays information found in TravelBanker, but does not alter it. Thus, the user will not have any issues with this
@@ -413,7 +413,14 @@ command should he make a mistake: it does not write any data.
 this method is not applicable.
 * **Cons**:  Extra layer of complexity that does not give any significant benefit
 
+===== Aspect: How balance command result is displayed.
+* **Alternative 1 (current choice)** : Pass the result as a string in the feedback to user.
+* **Pros** : Easy to implement and serves the purpose perfectly.
+* **Cons** : Value cannot be singled out to apply UI effects, such as colors.
 
+* **Alternative 2 ** : Single out result to make it modifiable by UI.
+* **Pros**: Allow for more pleasant user experience.
+* **Cons**: More difficult to implement and not much value added.
 // end::balancefeature[]
 
 === Logging
