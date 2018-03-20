@@ -27,7 +27,7 @@ public class MinCommand extends Command {
     public void setResult(CommandResult result) {
         this.result = result;
     }
-
+  
     @Override
     public CommandResult execute() {
         List<Person> lastShownList = model.getFilteredPersonList();
@@ -40,7 +40,6 @@ public class MinCommand extends Command {
                 index = Index.fromZeroBased(i);
                 lowestDebt = person.getMoney().balance;
             }
-
             if (lowestDebt == 0.0) {
                 result = new CommandResult(MESSAGE_SUCCESS_NO_RESULT);
             } else {
