@@ -31,6 +31,10 @@ public class Money {
         return value;
     }
 
+    public Double toDouble() {
+        return balance;
+    }
+
     /**
      * Returns true if a given string is a valid money balance.
      */
@@ -61,5 +65,8 @@ public class Money {
                 && this.value.equals(((Money) other).value)); // state check
     }
 
+    public int compareTo(Money other) {
+        return toDouble().compareTo(other.toDouble());
+    }
 
 }

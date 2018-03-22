@@ -231,6 +231,45 @@ Classes used by multiple components are in the `seedu.TravelBanker.commons` pack
 This section describes some noteworthy details on how certain features are implemented.
 
 // tag::undoredo[]
+=== List Positive/Negative feature
+==== Current Implementation
+
+The positive/negative feature is faciliatated by two new methods `ListPositiveBalanceCommand` and `ListNegativeBalanceCommand` which both reside inside `commands`. It supports listing out the people with negative balances and positive balances. This is helpful because it will allow the phonebook user to quickly list out people who they owe and who owes them money.
+
+For the new class I created `ListPositiveBalanceCommand`, this is the code for execute:
+
+[source,java]
+----
+public CommandResult execute() {
+    model.updateFilteredPersonList(isPositiveBalance());
+    return new CommandResult(MESSAGE_SUCCESS);
+}
+----
+
+As you can see from the code snippet, we update the filtered person list using a new function `isPositiveBalance()`.
+
+`isPositiveBalance()` is implemented as follows:
+
+[source,java]
+----
+public Predicate<Person> isPositiveBalance(){
+    return a -> a.getMoney().balance >= 0;
+}
+----
+
+The negative balance works the same way just checking to see if the balance is less than 0.
+
+====Alternatives Considered
+
+For an alternative way, I considered creating a new empty list `positiveList` and then adding to `positiveList` whenever the balance is greater than 0. Then I was going to display positive list. However this did not end up working because I noticed that updating the flitered list needed a predicate function as a paramter which my approach would not have. Therefore I had to consider a different approach that involved a predicate function.
+
+====Future Additions
+
+I can further refine the function to be much more powerful in filtering and listing out people. For instance, I could allow it to list people with whose names start with a specific letter because in an large addressbook, the user might want to quickly go through the addressbook, not ones who just have a postiive or negative balance.
+
+
+The function is a predicate function that checks to see if `a.getMoney().balance>=0` because the function `updateFilteredPersonList()` takes in a predicate parameter. In our function we see the predicate check to see if the person's money balance is positive and if so, it will be returned.
+
 === Undo/Redo feature
 ==== Current Implementation
 
@@ -423,6 +462,35 @@ this method is not applicable.
 * **Cons**: More difficult to implement and not much value added.
 // end::balancefeature[]
 
+// tag::sortfeature[]
+=== sort Feature
+The sort feature is implemented by the `sortCommand` class, which resides in the `Logic` component.
+When `sortCommand` is executed, it would call the `Model` component (`UniquePersonList`) to sort the person list. To specify the sorting order and the keyword to be sorted, two strings would be passed as parameters.
+In support of different keyword, Class `Name`, `Phone`, `Email`, `Address`, `Money` were add with a `compareTo` method for the creation of comparators.
+
+The sortCommand supports sorting of the filteredList (i.e. list that comes from FindCommand execution).
+
+In the current implementation, the sorted result would not be store in the storage.
+
+Commands that cannot be undone such as sortCommand are implemented like this:
+
+[source,java]
+----
+public class sortCommand extends Command {
+    @Override
+    public CommandResult execute() {
+        // ... sort logic ...
+        return new CommandResult(MESSAGE_SUCCESS);
+    }
+}
+----
+
+The following activity diagram summarizes the execution of the `sort` command.
+
+image::SortCommand_Activity_Diagram.png[width="800"]
+
+// end::sortfeature[]
+
 // tag::dataencryption[]
 === [Proposed] Data Encryption
 
@@ -543,6 +611,7 @@ The changes in the UI were minor, and simply added the money field to the `Perso
 ----
 
 // end::moneyfield[]
+
 === Logging
 
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels and logging destinations.

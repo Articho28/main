@@ -1,6 +1,14 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.SortCommand.SORT_ORDER_ASCENDING;
+import static seedu.address.logic.commands.SortCommand.SORT_ORDER_DESCENDING;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MONEY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -29,6 +37,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_ARGS = "Format of Parameter is not correct.";
     public static final String MESSAGE_INSUFFICIENT_PARTS = "Number of parts must be more than 1.";
 
     /**
@@ -42,6 +51,45 @@ public class ParserUtil {
             throw new IllegalValueException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses {@code args} into an {@code sortKey} and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     * @throws IllegalValueException if the specified SortKey is invalid (not non-zero unsigned integer).
+     */
+    public static String parseSortKey(String args) throws IllegalValueException {
+        String[] splittedArgs = args.trim().split("/");
+        String sortKey = splittedArgs[0] + "/";
+        if (splittedArgs.length != 2) {
+            throw new IllegalValueException(MESSAGE_INVALID_ARGS);
+        }
+        if (!sortKey.equals(PREFIX_NAME.getPrefix())
+                && !sortKey.equals(PREFIX_PHONE.getPrefix())
+                && !sortKey.equals(PREFIX_EMAIL.getPrefix())
+                && !sortKey.equals(PREFIX_ADDRESS.getPrefix())
+                && !sortKey.equals(PREFIX_TAG.getPrefix())
+                && !sortKey.equals(PREFIX_MONEY.getPrefix())) {
+            throw new IllegalValueException(MESSAGE_INVALID_ARGS);
+        }
+        return sortKey;
+    }
+
+    /**
+     * Parses {@code args} into an {@code sortOrder} and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     * @throws IllegalValueException if the specified SortOrder is invalid (not non-zero unsigned integer).
+     */
+    public static String parseSortOrder(String args) throws IllegalValueException {
+        String[] splittedArgs = args.trim().split("/");
+        String sortKey = splittedArgs[1];
+        if (splittedArgs.length != 2) {
+            throw new IllegalValueException(MESSAGE_INVALID_ARGS);
+        }
+        if ((!sortKey.equals(SORT_ORDER_ASCENDING) && !sortKey.equals(SORT_ORDER_DESCENDING))) {
+            throw new IllegalValueException(MESSAGE_INVALID_ARGS);
+        }
+        return sortKey;
     }
 
     /**

@@ -19,20 +19,18 @@ import seedu.address.model.tag.Tag;
 
 
 /**
- * Parses input arguments and creates a new EditCommand object
+ * Parses input arguments and creates a new RemoveTagCommand object
  */
 public class RemoveTagCommandParser implements Parser<RemoveTagCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the EditCommand
-     * and returns an EditCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the RemoveTagCommand
+     * and returns an RemoveTagCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public RemoveTagCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_TAG);
-
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TAG);
         Index index;
 
         try {
@@ -43,7 +41,7 @@ public class RemoveTagCommandParser implements Parser<RemoveTagCommand> {
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         try {
-            parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
+            parseTagsForRemove(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
         } catch (IllegalValueException ive) {
             throw new ParseException(ive.getMessage(), ive);
         }
@@ -60,7 +58,7 @@ public class RemoveTagCommandParser implements Parser<RemoveTagCommand> {
      * If {@code tags} contain only one element which is an empty string, it will be parsed into a
      * {@code Set<Tag>} containing zero tags.
      */
-    private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws IllegalValueException {
+    private Optional<Set<Tag>> parseTagsForRemove(Collection<String> tags) throws IllegalValueException {
         assert tags != null;
 
         if (tags.isEmpty()) {

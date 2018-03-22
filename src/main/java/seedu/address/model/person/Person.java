@@ -1,8 +1,16 @@
 package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.commands.SortCommand.SORT_ORDER_DESCENDING;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MONEY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Objects;
 import java.util.Set;
 
@@ -105,6 +113,39 @@ public class Person {
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
+    }
+
+    /**
+     * Create comparator for sorting person list
+     * @param sortKey
+     * @param sortOrder either "asc" or "desc"
+     * @return comparator
+     */
+    public static Comparator<Person> createComparator(String sortKey, String sortOrder) {
+
+        Comparator<Person> comparator;
+        if (sortKey.equals(PREFIX_NAME.getPrefix())) {
+            comparator = (person1, person2) -> +person1.getName().compareTo(person2.getName());
+        } else if (sortKey.equals(PREFIX_PHONE.getPrefix())) {
+            comparator = (person1, person2) -> +person1.getPhone().compareTo(person2.getPhone());
+        } else if (sortKey.equals(PREFIX_EMAIL.getPrefix())) {
+            comparator = (person1, person2) -> +person1.getEmail().compareTo(person2.getEmail());
+        } else if (sortKey.equals(PREFIX_ADDRESS.getPrefix())) {
+            comparator = (person1, person2) -> +person1.getAddress().compareTo(person2.getAddress());
+        } else if (sortKey.equals(PREFIX_MONEY.getPrefix())) {
+            comparator = (person1, person2) -> +person1.getMoney().compareTo(person2.getMoney());
+        } else if (sortKey.equals(PREFIX_TAG.getPrefix())) {
+            comparator = (person1, person2) -> +Integer.compare(person1.getTags().size(), person2.getTags().size());
+        } else {
+            // sort name by default
+            comparator = (person1, person2) -> +person1.getName().toString()
+                    .compareToIgnoreCase(person2.getName().toString());
+        }
+
+        if (sortOrder.equals(SORT_ORDER_DESCENDING)) {
+            comparator = comparator.reversed();
+        }
+        return comparator;
     }
 
 }
