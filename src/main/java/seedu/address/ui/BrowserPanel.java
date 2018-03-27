@@ -20,6 +20,7 @@ import seedu.address.model.person.Person;
  */
 public class BrowserPanel extends UiPart<Region> {
 
+    public static final String ATM_SEARCH_PAGE = "https://www.google.com.sg/maps/search/atm+near+me/";
     public static final String DEFAULT_PAGE = "default.html";
     public static final String SEARCH_PAGE_URL =
             "https://se-edu.github.io/addressbook-level4/DummySearchPage.html?name=";
@@ -49,6 +50,8 @@ public class BrowserPanel extends UiPart<Region> {
         Platform.runLater(() -> browser.getEngine().load(url));
     }
 
+    public void loadSearchPage() { loadPage(ATM_SEARCH_PAGE); }
+
     /**
      * Loads a default HTML file with a background that matches the general theme.
      */
@@ -67,6 +70,6 @@ public class BrowserPanel extends UiPart<Region> {
     @Subscribe
     private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        loadPersonPage(event.getNewSelection().person);
+        loadSearchPage();
     }
 }

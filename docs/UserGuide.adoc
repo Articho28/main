@@ -331,7 +331,7 @@ Format: `describe INDEX`
 
 Each contact will have a [DESTINATION] field to keep track of where a transaction between the
 user and the contact took place.
-Format: `trip [DESTIONATION]`
+Format: `trip [DESTINATION]`
 
 =======
 
