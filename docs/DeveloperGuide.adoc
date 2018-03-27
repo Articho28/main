@@ -1051,7 +1051,7 @@ as seen in traditional book-keeping methods.
 * find a nearby ATM as soon as a contact is loaded, which removes the need to switch apps when wanting to settle a debt.
 * list the contacts that owe you money or to which you owe money, thus removing the need to manually filter out the contacts you are looking for.
 
-== Feature Contribution
+=== Feature contribution
 
 * *Artsiom Skliar*
 ** *Major Enhancement*: incorporating balance and min commands, which calculates your overall balance as registered in TravelBanker.

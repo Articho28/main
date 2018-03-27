@@ -288,6 +288,11 @@ Format: `max`
 Lists the contact to which you owe the most money. +
 Format: `min`
 
+=== Settling up your balance with a contact: `settle` or `stl`[Since v1.3]
+
+Sets the balance of the specified contact to 0. +
+Format: `settle INDEX`
+
 === Seeing all the contacts that owe you money: `lent` or `le` [Coming in v2.0]
 
 Lists all the contacts that owe you an amount.
