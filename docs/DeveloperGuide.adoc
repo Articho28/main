@@ -1054,18 +1054,17 @@ as seen in traditional book-keeping methods.
 === Feature contribution
 
 * *Artsiom Skliar*
-** *Major Enhancement*: incorporating balance and min commands, which calculates your overall balance as registered in TravelBanker.
+** *Major Enhancement*: Incorporate map functionality to the TravelBanker. MapCommand shows the nearest ATM from the person's location.
+Also, incorporating balance and min commands, which calculates your overall balance as registered in TravelBanker.
 This value will tell the user if he owes more money than he's borrowed or vice-versa. This is essential to the product as
 TravelBanker relies on the need of the user to keep track of his informal finances efficiently and accurately.
 The ability to see view your overall balance is thus necessary as it provides insight to the user on his general
-financial situation. The min and max commands contribute to this goal by listing the largest amounts owed and lent.
+financial situation. The min and max commands contribute to this goal by listing the largest amounts owed and lent. The
+map functionality also shows the user how he can settle his debts quickly.
 
 ** *Minor Enhancement*: created aliases for every command received by TravelBanker to increase its efficiency.
 This is important to the product as it aims to be quick and efficient. Shortcuts for every command (except exit to
  avoid accidents) allows for a quicker and smoother user experience, thus making book-keeping quick and easy.
-
-** *Minor Enhancement*: modifying the select command to automatically search for a nearby atm when a contact is loaded.
-This aims to help the user find ways to settle his finances quickly and efficiently.
 
 * *Eric Zhou*
 ** *Major Enhancement*: incorporating various listing features which will can filter the list to list out people who owe you a negative amount or a positive amount.
@@ -1134,6 +1133,9 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`* ` |user | convert my balance into a different currency |
 
 |`*` |user | calculate the amount I am owed/I owe with an applied interest rate |
+
+| `* * *` |user | have a map functionality | find the nearest ATM to settle my accounts
+
 |=======================================================================
 
 [appendix]

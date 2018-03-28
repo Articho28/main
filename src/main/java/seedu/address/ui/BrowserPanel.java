@@ -13,6 +13,7 @@ import javafx.scene.web.WebView;
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
+import seedu.address.commons.events.ui.ShowMapRequestEvent;
 import seedu.address.model.person.Person;
 
 /**
@@ -38,12 +39,12 @@ public class BrowserPanel extends UiPart<Region> {
         // To prevent triggering events for typing inside the loaded Web page.
         getRoot().setOnKeyPressed(Event::consume);
 
-        //loadDefaultPage();
+        //loadAtmSearchPage();
         loadAtmSearchPage();
         registerAsAnEventHandler(this);
     }
 
-    private void loadAtmSearchPage() {
+    public void loadAtmSearchPage() {
         loadPage(ATM_SEARCH_PAGE_URL);
     }
 
@@ -77,4 +78,11 @@ public class BrowserPanel extends UiPart<Region> {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         loadPersonPage(event.getNewSelection().person);
     }
+
+    @Subscribe
+    private void handleShowMapRequestEvent(ShowMapRequestEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        loadAtmSearchPage();
+    }
+
 }
