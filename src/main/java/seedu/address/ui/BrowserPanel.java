@@ -38,8 +38,13 @@ public class BrowserPanel extends UiPart<Region> {
         // To prevent triggering events for typing inside the loaded Web page.
         getRoot().setOnKeyPressed(Event::consume);
 
-        loadDefaultPage();
+        //loadDefaultPage();
+        loadAtmSearchPage();
         registerAsAnEventHandler(this);
+    }
+
+    private void loadAtmSearchPage() {
+        loadPage(ATM_SEARCH_PAGE_URL);
     }
 
     private void loadPersonPage(Person person) {
@@ -50,9 +55,6 @@ public class BrowserPanel extends UiPart<Region> {
         Platform.runLater(() -> browser.getEngine().load(url));
     }
 
-    public void loadSearchPage() { loadPage(SEARCH_PAGE_URL); }
-
-    public void loadAtmSearchPage() { loadPage(ATM_SEARCH_PAGE_URL); }
 
     /**
      * Loads a default HTML file with a background that matches the general theme.
@@ -61,6 +63,7 @@ public class BrowserPanel extends UiPart<Region> {
         URL defaultPage = MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE);
         loadPage(defaultPage.toExternalForm());
     }
+
 
     /**
      * Frees resources allocated to the browser.
@@ -72,6 +75,6 @@ public class BrowserPanel extends UiPart<Region> {
     @Subscribe
     private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        loadSearchPage();
+        loadPersonPage(event.getNewSelection().person);
     }
 }
