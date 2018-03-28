@@ -19,6 +19,7 @@ import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListNegativeBalanceCommand;
 import seedu.address.logic.commands.ListPositiveBalanceCommand;
+import seedu.address.logic.commands.MapCommand;
 import seedu.address.logic.commands.MaxCommand;
 import seedu.address.logic.commands.MinCommand;
 import seedu.address.logic.commands.RedoCommand;
@@ -180,6 +181,11 @@ public class AddressBookParser {
 
         case SortCommand.COMMAND_SHORTCUT:
             return new SortCommandParser().parse(arguments);
+
+        case MapCommand.COMMAND_WORD:
+            return new MapCommand();
+        case MapCommand.COMMAND_SHORTCUT:
+            return new MapCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

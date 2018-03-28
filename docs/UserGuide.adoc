@@ -230,6 +230,11 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]
 
+=== Searching for the nearest ATM : `map` or `mp` [Since v1.3]
+
+Displays the nearest ATM in the browser panel.
+Format: `map` or `mp`
+
 === Clearing all entries : `clear` or `c`
 
 Clears all entries from the accounting book. +
@@ -354,7 +359,7 @@ Format: `describe INDEX`
 
 Each contact will have a [DESTINATION] field to keep track of where a transaction between the
 user and the contact took place.
-Format: `trip [DESTIONATION]`
+Format: `trip [DESTINATION]`
 
 =======
 
