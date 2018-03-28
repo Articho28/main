@@ -1,9 +1,7 @@
 package seedu.address.logic.commands;
 
 import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.events.ui.ShowMapRequestEvent;
-import seedu.address.ui.BrowserPanel;
 
 /**
  * Shows a map and searchs for the nearest ATM.
