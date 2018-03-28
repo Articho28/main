@@ -8,9 +8,10 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import guitests.guihandles.BrowserPanelHandle;
 import org.junit.Before;
 import org.junit.Test;
+
+import guitests.guihandles.BrowserPanelHandle;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.UndoRedoStack;
 import seedu.address.model.Model;
@@ -20,12 +21,14 @@ import seedu.address.ui.BrowserPanel;
 import seedu.address.ui.GuiUnitTest;
 
 
+
+
+
 public class MapCommandTest extends GuiUnitTest {
 
-    public BrowserPanel browserPanel;
-    public BrowserPanelHandle browserPanelHandle;
-    public MapCommand mapCommand;
-
+    private BrowserPanel browserPanel;
+    private BrowserPanelHandle browserPanelHandle;
+    private MapCommand mapCommand;
     private Model model;
     private Model expectedModel;
 
