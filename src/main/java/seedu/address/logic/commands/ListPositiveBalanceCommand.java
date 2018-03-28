@@ -9,10 +9,10 @@ import seedu.address.model.person.Person;
  */
 public class ListPositiveBalanceCommand extends Command {
 
-    public static final String COMMAND_WORD = "list positive";
-    public static final String COMMAND_SHORTCUT = "lp";
+    public static final String COMMAND_WORD = "lend";
+    public static final String COMMAND_SHORTCUT = "le";
 
-    public static final String MESSAGE_SUCCESS = "Listed all persons with positive balance amounts";
+    public static final String MESSAGE_SUCCESS = "Listed all persons who owe you money";
 
     @Override
     public CommandResult execute() {
