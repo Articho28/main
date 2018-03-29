@@ -29,7 +29,7 @@ import seedu.address.logic.commands.SettleCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.SplitCommand;
 import seedu.address.logic.commands.UndoCommand;
-
+import seedu.address.logic.commands.WipeBalancesCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -88,6 +88,12 @@ public class AddressBookParser {
 
         case ClearCommand.COMMAND_SHORTCUT:
             return new ClearCommand();
+
+        case WipeBalancesCommand.COMMAND_WORD:
+            return new WipeBalancesCommand();
+
+        case WipeBalancesCommand.COMMAND_SHORTCUT:
+            return new WipeBalancesCommand();
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);

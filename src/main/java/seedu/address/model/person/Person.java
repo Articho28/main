@@ -28,7 +28,7 @@ public class Person {
     private final Phone phone;
     private final Email email;
     private final Address address;
-    private final Money money;
+    private Money money;
 
     private final UniqueTagList tags;
 
@@ -65,6 +65,10 @@ public class Person {
     public Money getMoney() {
         return money;
     }
+
+    public void setMoney(Money money) {
+        this.money = money; }
+
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
