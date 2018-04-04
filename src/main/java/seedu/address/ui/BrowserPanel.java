@@ -39,7 +39,7 @@ public class BrowserPanel extends UiPart<Region> {
 
         // To prevent triggering events for typing inside the loaded Web page.
         getRoot().setOnKeyPressed(Event::consume);
-        
+
         loadAtmSearchPage();
         registerAsAnEventHandler(this);
     }
@@ -53,7 +53,7 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
     private void loadPersonAddress(Person person) {
-        loadPage ( ADDRESS_SEARCH_PAGE_URL + person.getAddress().value.replaceAll(" ", "%20"));
+        loadPage ( ADDRESS_SEARCH_PAGE_URL + person.getAddress().value);
     }
 
     public void loadPage(String url) {
