@@ -73,6 +73,7 @@ public class EditPersonDescriptorBuilder {
         return this;
     }
 
+    //@@author pkuhanan
     /**
      * Sets the {@code Money} of the {@code EditPersonDescriptor} that we are building.
      */
@@ -80,6 +81,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setMoney(new Money(money));
         return this;
     }
+    //@@author
 
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
@@ -91,6 +93,7 @@ public class EditPersonDescriptorBuilder {
         return this;
     }
 
+    //@@author chenchongsong
     /**
      * Copy a Tag Set {@code toCopy} and set the copy into the {@code EditPersonDescriptor}
      * that we are building.
@@ -99,6 +102,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setTags(toCopy);
         return this;
     }
+    //@@author
 
     public EditPersonDescriptor build() {
         return descriptor;

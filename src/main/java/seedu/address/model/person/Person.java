@@ -9,11 +9,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.item.Item;
+import seedu.address.model.item.UniqueItemList;
 import seedu.address.model.money.Money;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
@@ -31,6 +34,7 @@ public class Person {
     private Money money;
 
     private final UniqueTagList tags;
+    private final UniqueItemList items;
 
     /**
      * Every field must be present and not null.
@@ -44,7 +48,27 @@ public class Person {
         this.money = balance;
         // protect internal tags from changes in the arg list
         this.tags = new UniqueTagList(tags);
+        this.items = new UniqueItemList(new ArrayList<>()); // initialize as empty set
     }
+
+    //@@author chenchongsong
+    /**
+     * Every field must be present and not null.
+     * @param items must be provided
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Money balance,
+                  Set<Tag> tags, ArrayList<Item>items) {
+        requireAllNonNull(name, phone, email, address, tags, items);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.money = balance;
+        // protect internal tags from changes in the arg list
+        this.tags = new UniqueTagList(tags);
+        this.items = new UniqueItemList(items);
+    }
+    //@@author
 
     public Name getName() {
         return name;
@@ -62,13 +86,15 @@ public class Person {
         return address;
     }
 
+    //@@author pkuhanan
     public Money getMoney() {
         return money;
     }
+    //@@author
 
     public void setMoney(Money money) {
-        this.money = money; }
-
+        this.money = money;
+    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -76,6 +102,18 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags.toSet());
+    }
+
+    public ArrayList<Item> getItems() {
+        return items.toArrayList();
+    }
+
+    public UniqueItemList getUniqueItemList() {
+        return items;
+    }
+
+    public void setItems(ArrayList<Item> items) {
+        this.items.setItems(items);
     }
 
     @Override
@@ -99,7 +137,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, money, tags);
+        return Objects.hash(name, phone, email, address, money, tags, items);
     }
 
     @Override
@@ -119,6 +157,7 @@ public class Person {
         return builder.toString();
     }
 
+    //@@author chenchongsong
     /**
      * Create comparator for sorting person list
      * @param sortKey
@@ -151,5 +190,6 @@ public class Person {
         }
         return comparator;
     }
+    //@@author
 
 }

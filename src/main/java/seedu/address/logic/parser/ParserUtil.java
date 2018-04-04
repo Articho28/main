@@ -15,6 +15,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -54,6 +55,7 @@ public class ParserUtil {
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
 
+    //@@author chenchongsong
     /**
      * Parses {@code oneBasedIndices} into an ArrayList of {@code Index} and returns it.
      * Leading and trailing whitespaces will be trimmed.
@@ -109,6 +111,7 @@ public class ParserUtil {
         }
         return sortKey;
     }
+    //@@author
 
     /**
      * Parses a {@code String name} into a {@code Name}.
@@ -206,6 +209,7 @@ public class ParserUtil {
         return email.isPresent() ? Optional.of(parseEmail(email.get())) : Optional.empty();
     }
 
+    //@@author pkuhanan
     /**
      * Parses a {@code String money} into an {@code Money}.
      * Leading and trailing whitespaces will be trimmed.
@@ -229,6 +233,7 @@ public class ParserUtil {
         requireNonNull(money);
         return money.isPresent() ? Optional.of(parseMoney(money.get())) : Optional.empty();
     }
+    //@@author
 
     /**
      * Parses a {@code String tag} into a {@code Tag}.
@@ -255,5 +260,13 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }

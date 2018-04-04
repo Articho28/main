@@ -1,4 +1,6 @@
-//@@author chenchongsong
+# chenchongsong
+###### /java/seedu/address/logic/commands/RemoveTagCommandTest.java
+``` java
 package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertFalse;
@@ -187,3 +189,25 @@ public class RemoveTagCommandTest {
     }
 
 }
+```
+###### /java/seedu/address/testutil/EditPersonDescriptorBuilder.java
+``` java
+    /**
+     * Copy a Tag Set {@code toCopy} and set the copy into the {@code EditPersonDescriptor}
+     * that we are building.
+     */
+    public EditPersonDescriptorBuilder withTags(Set<Tag> toCopy) {
+        descriptor.setTags(toCopy);
+        return this;
+    }
+```
+###### /java/seedu/address/testutil/PersonBuilder.java
+``` java
+    /**
+     * Set an empty set {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     */
+    public PersonBuilder withoutTags() {
+        this.tags = SampleDataUtil.getTagSet();
+        return this;
+    }
+```

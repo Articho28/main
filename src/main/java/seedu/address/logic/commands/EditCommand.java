@@ -203,6 +203,7 @@ public class EditCommand extends UndoableCommand {
             return Optional.ofNullable(address);
         }
 
+        //@@author pkuhanan
         public void setMoney(Money money) {
             this.money = money;
         }
@@ -210,6 +211,7 @@ public class EditCommand extends UndoableCommand {
         public Optional<Money> getMoney() {
             return Optional.ofNullable(money);
         }
+        //@@author
 
         /**
          * Sets {@code tags} to this object's {@code tags}.

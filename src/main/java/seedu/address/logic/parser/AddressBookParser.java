@@ -10,12 +10,15 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.BalanceCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CurrencyCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
+import seedu.address.logic.commands.ItemAddCommand;
+import seedu.address.logic.commands.ItemShowCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListNegativeBalanceCommand;
 import seedu.address.logic.commands.ListPositiveBalanceCommand;
@@ -23,6 +26,7 @@ import seedu.address.logic.commands.MapCommand;
 import seedu.address.logic.commands.MaxCommand;
 import seedu.address.logic.commands.MinCommand;
 import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.RemindCommand;
 import seedu.address.logic.commands.RemoveTagCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.SettleCommand;
@@ -89,6 +93,12 @@ public class AddressBookParser {
         case ClearCommand.COMMAND_SHORTCUT:
             return new ClearCommand();
 
+        case CurrencyCommand.COMMAND_WORD:
+            return new CurrencyCommandParser().parse(arguments);
+
+        case CurrencyCommand.COMMAND_SHORTCUT:
+            return new CurrencyCommandParser().parse(arguments);
+
         case WipeBalancesCommand.COMMAND_WORD:
             return new WipeBalancesCommand();
 
@@ -146,23 +156,19 @@ public class AddressBookParser {
         case RedoCommand.COMMAND_SHORTCUT:
             return new RedoCommand();
 
-        case RemoveTagCommand.COMMAND_WORD:
-            return new RemoveTagCommandParser().parse(arguments);
-
-        case RemoveTagCommand.COMMAND_SHORTCUT:
-            return new RemoveTagCommandParser().parse(arguments);
-
         case BalanceCommand.COMMAND_SHORTCUT:
             return new BalanceCommand();
 
         case BalanceCommand.COMMAND_WORD:
             return new BalanceCommand();
 
+        //@@author pkuhanan
         case MaxCommand.COMMAND_WORD:
             return new MaxCommand();
 
         case MaxCommand.COMMAND_SHORTCUT:
             return new MaxCommand();
+        //@@author
 
         case MinCommand.COMMAND_WORD:
             return new MinCommand();
@@ -170,11 +176,20 @@ public class AddressBookParser {
         case MinCommand.COMMAND_SHORTCUT:
             return new MinCommand();
 
+        //@@author pkuhanan
         case SettleCommand.COMMAND_WORD:
             return new SettleCommandParser().parse(arguments);
 
         case SettleCommand.COMMAND_SHORTCUT:
             return new SettleCommandParser().parse(arguments);
+        //@@author
+
+        //@@author chenchongsong
+        case RemoveTagCommand.COMMAND_WORD:
+            return new RemoveTagCommandParser().parse(arguments);
+
+        case RemoveTagCommand.COMMAND_SHORTCUT:
+            return new RemoveTagCommandParser().parse(arguments);
 
         case SplitCommand.COMMAND_WORD:
             return new SplitCommandParser().parse(arguments);
@@ -188,10 +203,30 @@ public class AddressBookParser {
         case SortCommand.COMMAND_SHORTCUT:
             return new SortCommandParser().parse(arguments);
 
+        case ItemShowCommand.COMMAND_WORD:
+            return new ItemShowCommandParser().parse(arguments);
+
+        case ItemShowCommand.COMMAND_SHORTCUT:
+            return new ItemShowCommandParser().parse(arguments);
+
+        case ItemAddCommand.COMMAND_WORD:
+            return new ItemAddCommandParser().parse(arguments);
+
+        case ItemAddCommand.COMMAND_SHORTCUT:
+            return new ItemAddCommandParser().parse(arguments);
+        //@@author
+
         case MapCommand.COMMAND_WORD:
             return new MapCommand();
         case MapCommand.COMMAND_SHORTCUT:
             return new MapCommand();
+
+        //@@author pkuhanan
+        case RemindCommand.COMMAND_WORD:
+            return new RemindCommandParser().parse(arguments);
+        case RemindCommand.COMMAND_SHORTCUT:
+            return new RemindCommandParser().parse(arguments);
+        //@@author
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
