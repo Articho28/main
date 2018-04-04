@@ -137,7 +137,8 @@ public class AddressBook implements ReadOnlyAddressBook {
                 person.getEmail(),
                 person.getAddress(),
                 person.getMoney(),
-                correctTagReferences);
+                correctTagReferences,
+                person.getItems());
     }
 
     /**
@@ -190,7 +191,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         return Objects.hash(persons, tags);
     }
 
+    //@@author chenchongsong
     public void sortPersons(String sortKey, String sortOrder) {
         persons.sortPersons(sortKey, sortOrder);
     }
+    //@@author
 }

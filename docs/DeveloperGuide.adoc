@@ -1078,12 +1078,13 @@ This is important to the product as people will not always just owe money, somet
 This aims to help add ease to the user because the user will not need to type commands in specific way so Add and add will both add a new person.
 
 * *Chen Chongsong*
-** *Major Enhancement*: implementing a SortCommand to sort contact list according to balance, name, etc.
+** *Major Enhancement*: Implementing a new model called "item" field, which records all items related to a person in the contact list. An "item" has its name and its money value. For example, someone may owe the user an item called "taxiFare" and worth "100" dollars.
+ItemShowCommand, ItemAddCommand, ItemDeleteCommand are implemented, and the user is able to check items, add items and delete them. The storage XML format has been modified accordingly.
+This new feature is important because this allows the user to check reasons for owing money, in case the user forgets them.
+
+** *Minor Enhancement*: implementing a SortCommand to sort contact list according to balance, name, etc.
 If name sorted, the user would be able to search for certain person quickly and alphebatically. This is useful because sometimes the user cannot remember the exact names, and therefore, fail to search names with the FindCommand.
 If balance sorted, the user would be enabled to decide the order of returning money in the future. For example, the user can choose to firstly return money to "small creditors" (because the user owes little money to them, and he can pay them off easily)
-
-** *Minor Enhancement*: created a new command to delete specified tags (RemoveTagCommand).
-This is important to the product, especially when the user wants to delete only one tag from a contact person who has many tags. Perviously, when using EditCommand to remove tags, the user needs to input all remaining tags. RemoveTagCommand, however, can be used by inputing the few tags that the user wants to delete. That improves efficiency to a great extent.
 
 * *Prian Kuhanandan*
 ** *Major Enhancement*: Implementing the money field, and allowing for existing commands to use the field such as the add and edit commands.
@@ -1128,9 +1129,9 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* *` |user | see for which items/reasons do I owe a contact / a contact owes me |
 
-|`* ` |user | choose the balance the currency that I am owed |
+|`*` |user | choose the balance the currency that I am owed |
 
-|`* ` |user | convert my balance into a different currency |
+|`*` |user | convert my balance into a different currency |
 
 |`*` |user | calculate the amount I am owed/I owe with an applied interest rate |
 

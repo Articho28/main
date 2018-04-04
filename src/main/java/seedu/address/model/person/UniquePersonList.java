@@ -117,6 +117,7 @@ public class UniquePersonList implements Iterable<Person> {
         return internalList.hashCode();
     }
 
+    //@@author chenchongsong
     /**
      * Sorts {@code internalList} by keyword ascendingly or descendingly
      */
@@ -124,5 +125,6 @@ public class UniquePersonList implements Iterable<Person> {
         Comparator<Person> comparator = Person.createComparator(sortKey, sortOrder);
         internalList.sort(comparator);
     }
+    //@@author
 
 }

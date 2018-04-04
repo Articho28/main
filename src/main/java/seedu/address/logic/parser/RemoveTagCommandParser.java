@@ -1,3 +1,4 @@
+//@@author chenchongsong
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
@@ -15,8 +16,6 @@ import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.RemoveTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
-
-
 
 /**
  * Parses input arguments and creates a new RemoveTagCommand object
@@ -44,10 +43,6 @@ public class RemoveTagCommandParser implements Parser<RemoveTagCommand> {
             parseTagsForRemove(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
         } catch (IllegalValueException ive) {
             throw new ParseException(ive.getMessage(), ive);
-        }
-
-        if (!editPersonDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(RemoveTagCommand.MESSAGE_NOT_EDITED);
         }
 
         return new RemoveTagCommand(index, editPersonDescriptor);
