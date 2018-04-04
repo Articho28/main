@@ -28,6 +28,7 @@ public class BrowserPanelTest extends GuiUnitTest {
         browserPanelHandle = new BrowserPanelHandle(browserPanel.getRoot());
     }
 
+    //@@author Articho28
     @Test
     public void display() throws Exception {
         // default web page

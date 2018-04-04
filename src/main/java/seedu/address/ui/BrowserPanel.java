@@ -44,6 +44,7 @@ public class BrowserPanel extends UiPart<Region> {
         registerAsAnEventHandler(this);
     }
 
+    //@@author Articho28
     public void loadAtmSearchPage() {
         loadPage(ATM_SEARCH_PAGE_URL);
     }
@@ -51,11 +52,11 @@ public class BrowserPanel extends UiPart<Region> {
     private void loadPersonPage(Person person) {
         loadPage(SEARCH_PAGE_URL + person.getName().fullName);
     }
-
+    //@@author Articho28
     private void loadPersonAddress(Person person) {
         loadPage ( ADDRESS_SEARCH_PAGE_URL + person.getAddress().value);
     }
-
+    //@@author
     public void loadPage(String url) {
         Platform.runLater(() -> browser.getEngine().load(url));
     }
@@ -82,7 +83,7 @@ public class BrowserPanel extends UiPart<Region> {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         loadPersonAddress(event.getNewSelection().person);
     }
-
+    //@@author Articho28
     @Subscribe
     private void handleShowMapRequestEvent(ShowMapRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
