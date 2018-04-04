@@ -25,7 +25,7 @@ public class BrowserPanel extends UiPart<Region> {
     public static final String DEFAULT_PAGE = "default.html";
     public static final String SEARCH_PAGE_URL =
             "https://se-edu.github.io/addressbook-level4/DummySearchPage.html?name=";
-    public static String ADDRESS_SEARCH_PAGE_URL = "https://www.google.com.sg/maps/search/";
+    public static final String ADDRESS_SEARCH_PAGE_URL = "https://www.google.com.sg/maps/search/";
 
     private static final String FXML = "BrowserPanel.fxml";
 
@@ -54,7 +54,7 @@ public class BrowserPanel extends UiPart<Region> {
     }
     //@@author Articho28
     private void loadPersonAddress(Person person) {
-        loadPage ( ADDRESS_SEARCH_PAGE_URL + person.getAddress().value);
+        loadPage (ADDRESS_SEARCH_PAGE_URL + person.getAddress().value);
     }
     //@@author
     public void loadPage(String url) {

@@ -1,15 +1,18 @@
 package seedu.address.ui;
 
 import static guitests.guihandles.WebViewUtil.waitUntilBrowserLoaded;
+
 import static org.junit.Assert.assertEquals;
 import static seedu.address.testutil.EventsUtil.postNow;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.net.URL;
 
-import guitests.guihandles.BrowserPanelHandle;
 import org.junit.Before;
 import org.junit.Test;
+
+import guitests.guihandles.BrowserPanelHandle;
+
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 
 public class BrowserPanelTest extends GuiUnitTest {
