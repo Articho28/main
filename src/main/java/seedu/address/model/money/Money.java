@@ -1,3 +1,4 @@
+//@@author pkuhanan
 package seedu.address.model.money;
 
 import static java.util.Objects.requireNonNull;
@@ -9,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Money {
     public static final String MESSAGE_MONEY_CONSTRAINTS = "Money values should be numbers";
-    public static final String MONEY_VALIDATION_REGEX = "-?\\d+(\\.\\d+)?";
+    public static final String MONEY_VALIDATION_REGEX = "-?\\d+(\\.\\d+)?(E-?\\d+)?";
 
     public final double balance;
     public final String value;
@@ -42,6 +43,7 @@ public class Money {
         return test.matches(MONEY_VALIDATION_REGEX);
     }
 
+    //@@author
     /**
      * Returns true if the user need to pay the contact certain amount of money
      * @return true/false
@@ -58,15 +60,18 @@ public class Money {
         return balance > 0.0;
     }
 
+    //@@author pkuhanan
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Money // instanceof handles nulls
                 && this.value.equals(((Money) other).value)); // state check
     }
+    //@@author
 
     public int compareTo(Money other) {
         return toDouble().compareTo(other.toDouble());
     }
 
 }
+//@@author

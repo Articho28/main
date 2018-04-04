@@ -14,11 +14,9 @@ public class WipeBalancesCommand extends Command {
 
     public static final String COMMAND_WORD = "wipe";
     public static final String COMMAND_SHORTCUT = "w";
+
     public static final String MESSAGE_SUCCESS = "Wiped all balances";
     public static final String MESSAGE_USAGE = COMMAND_WORD + "Wipes all balances";
-
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
     private Money cleared = new Money("0.0");

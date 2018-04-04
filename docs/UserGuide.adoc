@@ -31,7 +31,7 @@ This app will not work with earlier versions of Java 8.
 .  Copy the file to the folder you want to use as the home folder for your accounting book.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
-image::Ui.png[width="790"]
+image::UIMockup.png[width="790"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
@@ -251,11 +251,6 @@ TravelBanker data are saved in the hard disk automatically after any command tha
 There is no need to save manually.
 
 // tag::dataencryption[]
-=== Encrypting data files `[coming in v2.0]`
-
-_{explain how the user can enable/disable data encryption}_
-// end::dataencryption[]
-
 
 === Checking overall balance: `balance` or `b` [Since v1.2]
 
@@ -310,12 +305,64 @@ Examples:
 * `split 1 2 m/200`
 * `sp 1 2 3 m/400.00`
 
+=== Clear up everyone's balance: `wipe` or `w` [Since v1.3]
+
+Wipes everyone's balances to 0.0 +
+Format: `wipe` +
+Format: `w`
+
+=== Showing items related to a person : `itemshow` or `is`
+
+Show all items related to a person (specified by INDEX). +
+Format: `itemshow INDEX` or `is INDEX`
+
+****
+* The index refers to the index number shown in the most recent listing.
+* The index *must be a positive integer* `1, 2, 3, ...`
+****
+
+Examples:
+
+* `list` +
+`itemshow 2` +
+Shows items related to the 2nd person in the accounting book.
+* `find Betsy` +
+`itemshow 1` +
+Shows item related to the 1st person in the results of the `find` command.
+
+
+=== Add a New Item : `itemadd` or `ia`
+
+Attaching a new item to a specified person. +
+Format: `itemadd INDEX n/ITEM_NAME m/MONEY` or `ia INDEX n/ITEM_NAME m/MONEY`
+
+****
+* The index refers to the index number shown in the most recent listing.
+* The index *must be a positive integer* `1, 2, 3, ...`
+****
+
+Examples:
+
+* `itemadd 2 n/taxiFare m/10.0`
+
 
 === Settling up your balance with a contact: `settle` or `stl`[Since v1.3]
 
 Sets the balance of the specified contact to 0. +
 Format: `settle INDEX`
 
+=== Remind a contact to pay their balance: `remind` or `rm`[Since v1.4]
+
+Opens the default email client with a generated email to the contact with the balance in the message.
+Format: `remind INDEX`
+
+=== Converts your balance in a desired currency: `convert` or `cv` [Coming in v2.0]`
+
+Converts an entries certain balance in a currency of your choice.
+Format: `convert/cv INDEX FROM_CURRENCY TO_CURRENCY`
+
+Example: `convert 2 USD JPY`
+Example: `convert 1 SGD USD`
 
 === Seeing all the contacts that owe you money: `lent` or `le` [Coming in v2.0]
 
@@ -328,6 +375,10 @@ Format: `lent` or `le`
 Lists all the contacts that owe you an amount.
 Format: `debt` or `de`
 
+=== Encrypting data files `[coming in v2.0]`
+
+_{explain how the user can enable/disable data encryption}_
+// end::dataencryption[]
 
 === Applies an interest rate to your balance: `interest FACTOR` or `i FACTOR` [Coming in v2.0]
 
@@ -340,13 +391,6 @@ Format: `interest FACTOR` or `i FACTOR`
 Finds the person that owes the user the most money.
 Improves the usability by adding a quick access function for a common use case.
 Format: `biggest-debtor INDEX`
-
-
-=== Converts your balance in a desired currency: `currency c/` or `cu c/` [Coming in v2.0]`
-
-Converts your total balance in a currency of your choice.
-Format: `balance c/[CURRENCY]` or `b c/[CURRENCY]`
-
 
 === Lists a description of the debts someone owes you: `describe` or `db` [Coming in v2.0]
 
@@ -391,6 +435,7 @@ e.g.`select 2`
 * *RemoveTag* : `removetag INDEX [t/TAG]...`
 * *Sort* : `sort KEYWORD_PREFIX/ORDER`
 * *Split* : `split INDEX1 [INDEX2...] m/MONEY`
+* *ItemShow* : `itemshow INDEX`
 * *Max* : `max`
 * *Min* : `min`
 * *Describe* : `describe INDEX`
