@@ -11,7 +11,7 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4
+:repoURL: https://github.com/CS2103JAN2018-T11-B4/main
 
 By: `CS2103JAN18-T11-B4`      Since: `Jun 2016`      Licence: `MIT`
 
@@ -27,7 +27,7 @@ TravelBanker (TB) is for those who *prefer to use a desktop app for managing the
 Having any Java 8 version is not enough. +
 This app will not work with earlier versions of Java 8.
 +
-.  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
+.  Download the latest `TravelBanker.jar` link:{repoURL}/releases[here].
 .  Copy the file to the folder you want to use as the home folder for your accounting book.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
@@ -257,7 +257,7 @@ There is no need to save manually.
 Calculates your total balance. +
 Format: `balance` or `b`
 
-
+// tag::removetag[]
 === Remove Tags: `removetag` or `rt` [Since v1.2]
 
 Remove Tags from a specific person in the TravelBanker. +
@@ -268,7 +268,7 @@ Examples:
 
 * `removetag 1 t/owesMoney t/friends` +
 Remove the tags `owesMoney` and `friends` from the first person.
-
+// end::removetag[]
 
 === Seeing which contact owes you the most: `max` or `mx` [Since v1.2]
 
@@ -281,7 +281,7 @@ Format: `max`
 Lists the contact to which you owe the most money. +
 Format: `min`
 
-
+// tag::sort[]
 === Sorting all persons: `sort` or  `so` [Since v1.2]
 
 Sorts all persons in ascendingly or descendingly, ordering by the specified keywords. +
@@ -292,8 +292,9 @@ Examples:
 
 * `sort n/asc`
 * `so m/desc`
+// end::sort[]
 
-
+// tag::split[]
 === Splitting a bill: `split` or  `sp` [Since v1.3]
 
 Splits a bill among multiple people, specified by their indices. +
@@ -304,6 +305,7 @@ Examples:
 
 * `split 1 2 m/200`
 * `sp 1 2 3 m/400.00`
+// end::split[]
 
 === Clear up everyone's balance: `wipe` or `w` [Since v1.3]
 
@@ -311,6 +313,8 @@ Wipes everyone's balances to 0.0 +
 Format: `wipe` +
 Format: `w`
 
+
+// tag::item[]
 === Showing items related to a person : `itemshow` or `is` [Since v1.4]
 
 Show all items related to a person (specified by INDEX). +
@@ -337,6 +341,7 @@ Attaching a new item to a specified person. +
 Format: `itemadd INDEX n/ITEM_NAME m/MONEY` or `ia INDEX n/ITEM_NAME m/MONEY`
 
 ****
+* To view the newly added item, please use the `itemshow` command!
 * The index refers to the index number shown in the most recent listing.
 * The index *must be a positive integer* `1, 2, 3, ...`
 ****
@@ -345,6 +350,23 @@ Examples:
 
 * `itemadd 2 n/taxiFare m/10.0`
 
+
+=== Delete an Existing Item : `itemdelete` or `id` [Since v1.5rc]
+
+Deleting an item from a specified person. +
+Format: `itemdelete PERSON_INDEX ITEM_INDEX` or `id PERSON_INDEX ITEM_INDEX`
+
+****
+* The index of person refers to the one shown in the most recent listing.
+* The index of item refers to the one shown in the `itemshow` result.
+* The indices *must be a positive integer* `1, 2, 3, ...`
+****
+
+Examples:
+
+* `itemdelete 1 2`
+* This deletes the second item from the first person in the contact list.
+// end::item[]
 
 === Settling up your balance with a contact: `settle` or `stl`[Since v1.3]
 
@@ -434,6 +456,8 @@ e.g.`select 2`
 * *Sort* : `sort KEYWORD_PREFIX/ORDER`
 * *Split* : `split INDEX1 [INDEX2...] m/MONEY`
 * *ItemShow* : `itemshow INDEX`
+* *ItemAdd* : `itemadd INDEX n/ITEM_NAME m/MONEY`
+* *ItemDelete* : `itemdelete PERSON_INDEX ITEM_INDEX`
 * *Max* : `max`
 * *Min* : `min`
 * *Describe* : `describe INDEX`

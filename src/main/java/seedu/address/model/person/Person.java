@@ -96,6 +96,15 @@ public class Person {
         this.money = money;
     }
 
+    //@@author chenchongsong
+    /**
+     * Returns the amount of money due to unknown reasons/items
+     * @return
+     */
+    public Double getReasonUnknownAmount() {
+        return money.toDouble() - items.getValueSum();
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -115,6 +124,11 @@ public class Person {
     public void setItems(ArrayList<Item> items) {
         this.items.setItems(items);
     }
+
+    public void clearItems() {
+        this.items.setItems(new ArrayList<>());
+    }
+    //@@author
 
     @Override
     public boolean equals(Object other) {

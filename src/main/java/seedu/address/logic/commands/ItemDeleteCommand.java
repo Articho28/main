@@ -2,8 +2,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MONEY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
@@ -25,37 +23,35 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.tag.Tag;
 
 /**
- * Attach a new item to a specified person
+ * Delete an item from a specified person
  */
-public class ItemAddCommand extends UndoableCommand {
+public class ItemDeleteCommand extends UndoableCommand {
 
-    public static final String COMMAND_WORD = "itemadd";
-    public static final String COMMAND_SHORTCUT = "ia";
+    public static final String COMMAND_WORD = "itemdelete";
+    public static final String COMMAND_SHORTCUT = "id";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Attaching a new item to a specified person. "
-            + "Parameters: INDEX "
-            + PREFIX_NAME + "ITEM_NAME "
-            + PREFIX_MONEY + "MONEY\n"
-            + "Example: " + COMMAND_WORD + " 2 "
-            + PREFIX_NAME + "taxiFare "
-            + PREFIX_MONEY + "30\n";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deleting an item from a specified person. "
+            + "Parameters: PERSON_INDEX ITEM_INDEX\n"
+            + "Example: " + COMMAND_WORD + " 1 2\n"
+            + "This example command deletes the second item from the first person.\n";
 
-    public static final String MESSAGE_ADD_ITEM_SUCCESS = "Item Added for Person %1$s.\n"
-            + "To view all items, use \"itemshow\" command!";
+    public static final String MESSAGE_ADD_ITEM_SUCCESS = "Items Deleted for Person %1$s.\n";
     public static final String MESSAGE_INVALID_ARGUMENT = "The Argument is Invalid!";
 
-    private final Index targetIndex;
-    private final Item item;
+    private final Index indexPerson;
+    private final Index indexItem;
     private Person personToEdit;
     private Person editedPerson;
 
     /**
-     * @param index of person in the filtered person list to whom a new item will be attached
+     * @param indexPerson The index of person in the filtered person list whose item the user wants to delete
+     * @param indexItem The index of item the user wants to delete
      */
-    public ItemAddCommand(Index index, String itemName, String itemValue) {
-        requireNonNull(index);
-        this.targetIndex = index;
-        this.item = new Item(itemName, itemValue);
+    public ItemDeleteCommand(Index indexPerson, Index indexItem) {
+        requireNonNull(indexPerson);
+        requireNonNull(indexItem);
+        this.indexPerson = indexPerson;
+        this.indexItem = indexItem;
     }
 
     @Override
@@ -68,23 +64,23 @@ public class ItemAddCommand extends UndoableCommand {
             throw new AssertionError("The target person cannot be missing");
         }
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_ADD_ITEM_SUCCESS, targetIndex.getOneBased()));
+        return new CommandResult(String.format(MESSAGE_ADD_ITEM_SUCCESS, indexPerson.getOneBased()));
     }
 
     @Override
     protected void preprocessUndoableCommand() throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+        if (indexPerson.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-        personToEdit = lastShownList.get(targetIndex.getZeroBased());
+        personToEdit = lastShownList.get(indexPerson.getZeroBased());
         editedPerson = getEditedPerson(personToEdit);
     }
 
     /**
      * Creates and returns a {@code Person} with the details of {@code person}
-     * but with a updated item list
+     * but with an updated item list
      */
     private Person getEditedPerson(Person person) {
         assert person != null;
@@ -96,21 +92,21 @@ public class ItemAddCommand extends UndoableCommand {
         Address address = person.getAddress();
         Money money = person.getMoney();
         Set<Tag> tags = person.getTags();
-        ArrayList<Item> items = getAppendedItemList(person.getItems());
+        ArrayList<Item> items = getItemRemovedItemList(person.getItems());
 
-        // returns a new Person based mainly on references to original information
+        // returns a new Person based mainly on references to original information, but with an updated item list
         return new Person(name, phone, email, address, money, tags, items);
     }
 
     /**
      * Create and returns an updated Item List
-     * The new item would be appended to the end of the original Item List
+     * where the target Item will be removed
      */
-    private ArrayList<Item> getAppendedItemList(ArrayList<Item> items) {
+    private ArrayList<Item> getItemRemovedItemList(ArrayList<Item> items) {
         assert items != null;
-        ArrayList<Item> appendedItemList = new ArrayList<>(items);
-        appendedItemList.add(this.item);
-        return appendedItemList;
+        ArrayList<Item> itemRemovedItemList = new ArrayList<>(items);
+        itemRemovedItemList.remove(indexItem.getZeroBased());
+        return itemRemovedItemList;
     }
 
 }
