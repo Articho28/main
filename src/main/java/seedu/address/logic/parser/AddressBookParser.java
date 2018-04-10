@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.BalanceCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.ColorTagCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CurrencyCommand;
 import seedu.address.logic.commands.DeleteCommand;
@@ -234,7 +235,10 @@ public class AddressBookParser {
         case RemindCommand.COMMAND_SHORTCUT:
             return new RemindCommandParser().parse(arguments);
         //@@author
-
+        case ColorTagCommand.COMMAND_WORD:
+            return new ColorTagCommandParser().parse(arguments);
+        case ColorTagCommand.COMMAND_WORD_SHORTCUT:
+            return new ColorTagCommandParser().parse(arguments);
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
