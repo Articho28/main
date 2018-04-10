@@ -76,6 +76,14 @@ public class PersonCard extends UiPart<Region> {
         });
     }
 
+    public void changeTagColor(Person person, String color) {
+        person.getTags().forEach(tag -> {
+            Label tagLabel = new Label(tag.tagName);
+            tagLabel.getStyleClass().add(color);
+            tags.getChildren().add(tagLabel);
+        });
+    }
+
     @Override
     public boolean equals(Object other) {
         // short circuit if same object

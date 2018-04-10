@@ -5,9 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.List;
 import java.util.Set;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
@@ -36,10 +33,6 @@ public class ColorTagCommand extends UndoableCommand {
     private static final String[] TAG_COLOR =
             {"red", "yellow", "orange", "white", "blue", "green", "pink", "black", "grey"};
 
-    @FXML
-    private FlowPane tags;
-
-
     /**
      * This returns a ColorTagCommand that is ready to be executed.
      *
@@ -50,16 +43,14 @@ public class ColorTagCommand extends UndoableCommand {
         this.color = color;
         this.tagsToColor = tags;
     }
-
+    //Method attempts to change the color of all tags to a specified color.
     @Override
     public CommandResult executeUndoableCommand() throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
         for (Person person : lastShownList) {
-           Set<Tag> personTags = person.getTags();
-           for (Tag tag : personTags) {
+           for (Tag tag : person.getTags()) {
                if (tagsToColor.contains(tag)) {
                    changed = true;
-
                }
            }
         }
@@ -75,14 +66,6 @@ public class ColorTagCommand extends UndoableCommand {
         return TAG_COLOR[Math.abs(tagName.hashCode()) % TAG_COLOR.length];
     }
 
-    private void initTags(Person person, String colorChosen) {
-        person.getTags().forEach(tag -> {
-            Label tagLabel = new Label(tag.tagName);
-            tagLabel.getStyleClass().add(colorChosen);
-            System.out.println(colorChosen);
-            tags.getChildren().add(tagLabel);
-        });
-    }
 }
 
 
