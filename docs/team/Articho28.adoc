@@ -1,0 +1,4 @@
+= Artsiom Skliar - Project Portfolio
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+

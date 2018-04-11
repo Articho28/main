@@ -174,7 +174,7 @@ public class AddressBookParser {
             return new MaxCommand();
         //@@author
 
-            //@@author Articho 28
+            //@@author Articho28
         case MinCommand.COMMAND_WORD:
             return new MinCommand();
 

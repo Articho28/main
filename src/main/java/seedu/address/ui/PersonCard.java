@@ -57,14 +57,14 @@ public class PersonCard extends UiPart<Region> {
         initTags(person);
     }
 
-
+    //@@author Aritcho28-reused
     /**
      * Returns the color for a specific tag.
      */
     private String getTagColor(String tagName) {
         return TAG_COLOR[Math.abs(tagName.hashCode()) % TAG_COLOR.length];
     }
-    //@@author Aritcho28-reused
+
     /**
      * Creates the tag colors for a person.
      */
