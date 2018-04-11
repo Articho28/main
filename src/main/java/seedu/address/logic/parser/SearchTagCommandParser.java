@@ -1,3 +1,5 @@
+//@@author Articho28
+
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
@@ -30,5 +32,4 @@ public class SearchTagCommandParser implements Parser<SearchTagCommand> {
         }
         return new SearchTagCommand(tagsToFind);
     }
-
 }

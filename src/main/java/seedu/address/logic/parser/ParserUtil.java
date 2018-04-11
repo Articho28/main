@@ -270,7 +270,8 @@ public class ParserUtil {
     public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
-
+    //@@author Articho28
+    //Attempted to implement change tag color feature. This is residue.
     public static boolean isValidColor(String color) throws ParseException {
         switch (color) {
             case "red":

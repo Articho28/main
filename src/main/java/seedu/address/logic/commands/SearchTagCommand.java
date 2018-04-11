@@ -1,5 +1,5 @@
+//@@author Articho28
 package seedu.address.logic.commands;
-
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
@@ -18,6 +18,7 @@ public class SearchTagCommand extends UndoableCommand {
             + "Example: " + COMMAND_WORD
             + PREFIX_TAG + "owesMoney "
             + PREFIX_TAG + "friends";
+
     public static final String MESSAGE_SUCCESS = "Found Persons with tags: ";
 
 
@@ -40,8 +41,8 @@ public class SearchTagCommand extends UndoableCommand {
         model.updateFilteredPersonList(personHasTags());
         int result = model.getFilteredPersonList().size();
         if (result > 0) {
-            String tagsString = tagsToFind.toString();
-            String tagsFormatted = tagsString.replace("[", " ")
+            String tagsFormatted = tagsToFind.toString()
+                    .replace("[", " ")
                     .replace("]", " ")
                     .replace("[,", " ");
             return new CommandResult(MESSAGE_SUCCESS
@@ -54,6 +55,11 @@ public class SearchTagCommand extends UndoableCommand {
         }
     }
 
+    /**
+     * This function returns person Predicate that indicates if a given has the tags we are
+     * looking for.
+     * @return
+     */
     public Predicate<Person> personHasTags() {
         return person -> person.getTags().containsAll(tagsToFind);
     }
