@@ -8,6 +8,7 @@ import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
+
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.UndoRedoStack;
 import seedu.address.model.Model;
@@ -22,8 +23,9 @@ public class SearchTagCommandTest {
     private Model expectedModelMultipleInput;
     private SearchTagCommand searchTagCommandSingleTagInput;
     private SearchTagCommand searchTagCommandMultipleTagsInput;
-    public Set<Tag> singleTagAsInput;
-    public Set<Tag> multipleTagsAsInput;
+    private Set<Tag> multipleTagsAsInput;
+    private Set<Tag> singleTagAsInput;
+
 
 
     @Before

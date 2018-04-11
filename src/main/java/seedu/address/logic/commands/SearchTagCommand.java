@@ -8,6 +8,9 @@ import java.util.function.Predicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
+/**
+ * Lists all the people that contain specified tags.
+ */
 public class SearchTagCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "searchtag";
@@ -50,7 +53,7 @@ public class SearchTagCommand extends UndoableCommand {
         } else {
             return new CommandResult(MESSAGE_FAILURE
                     + "\n"
-                    + tagsFormatted );
+                    + tagsFormatted);
         }
     }
 
@@ -63,6 +66,11 @@ public class SearchTagCommand extends UndoableCommand {
         return person -> person.getTags().containsAll(tagsToCheck);
     }
 
+    /**
+     * Formats the tags to a string to display clearly to user.
+     * @param tagsToFormat
+     * @return
+     */
     public static String formatTagsFeedback(Set<Tag> tagsToFormat) {
         String tagsFormatted = tagsToFormat.toString()
                 .replace("[", " ")

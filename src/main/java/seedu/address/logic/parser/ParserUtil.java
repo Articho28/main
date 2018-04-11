@@ -20,7 +20,6 @@ import java.util.stream.Stream;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.money.Money;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -269,31 +268,5 @@ public class ParserUtil {
      */
     public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
-    //@@author Articho28
-    //Attempted to implement change tag color feature. This is residue.
-    public static boolean isValidColor(String color) throws ParseException {
-        switch (color) {
-            case "red":
-                return true;
-            case "yellow":
-                return true;
-            case "orange":
-                return true;
-            case "blue":
-                return true;
-            case "green":
-                return true;
-            case "white":
-                return true;
-            case "black":
-                return true;
-            case "grey":
-                return true;
-            case "pink":
-                return true;
-            default:
-                throw new ParseException("Please choose among the supported colors.");
-        }
     }
 }

@@ -13,6 +13,9 @@ import seedu.address.logic.commands.SearchTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
+/**
+ * Parses a SearchTagCommand. Verifies that tags are properly formatted before
+ */
 public class SearchTagCommandParser implements Parser<SearchTagCommand> {
 
     /**
