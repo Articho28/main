@@ -46,15 +46,25 @@ public class SearchTagCommandTest {
         searchTagCommandSingleTagInput = new SearchTagCommand(singleTagAsInput);
         searchTagCommandMultipleTagsInput = new SearchTagCommand((multipleTagsAsInput));
         searchTagCommandSingleTagInput.setData(model, new CommandHistory(), new UndoRedoStack());
+        searchTagCommandMultipleTagsInput.setData(model, new CommandHistory(), new UndoRedoStack());
     }
 
     @Test
     public void showsAllContactWithFriendsTag() {
         int result = expectedModelSingleInput.getFilteredPersonList().size();
-        assertCommandSuccess(searchTagCommandSingleTagInput, model, SearchTagCommand.MESSAGE_SUCCESS + "\n"
-                + SearchTagCommand.formatTagsFeedback(singleTagAsInput) + "\n" + Command.getMessageForPersonListShownSummary(result), expectedModelSingleInput);
+        assertCommandSuccess(searchTagCommandSingleTagInput, model, SearchTagCommand.MESSAGE_SUCCESS
+                + "\n"
+                + SearchTagCommand.formatTagsFeedback(singleTagAsInput)
+                + "\n"
+                + Command.getMessageForPersonListShownSummary(result), expectedModelSingleInput);
+    }
 
-
+    @Test
+    public void showsNoContactsWithMultipleTags() {
+        int result = expectedModelMultipleInput.getFilteredPersonList().size();
+        assertCommandSuccess(searchTagCommandMultipleTagsInput, model, SearchTagCommand.MESSAGE_FAILURE
+                + "\n"
+                + SearchTagCommand.formatTagsFeedback(multipleTagsAsInput), expectedModelMultipleInput);
     }
 
 }

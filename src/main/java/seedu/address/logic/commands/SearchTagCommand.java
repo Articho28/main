@@ -20,7 +20,7 @@ public class SearchTagCommand extends UndoableCommand {
             + PREFIX_TAG + "friends";
 
     public static final String MESSAGE_SUCCESS = "Found Persons with tags: ";
-
+    public static final String MESSAGE_FAILURE = "No results found with the tag: ";
 
     private final Set<Tag> tagsToFind;
 
@@ -40,15 +40,17 @@ public class SearchTagCommand extends UndoableCommand {
     public CommandResult executeUndoableCommand() {
         model.updateFilteredPersonList(personHasTags(tagsToFind));
         int result = model.getFilteredPersonList().size();
+        String tagsFormatted = formatTagsFeedback(tagsToFind);
         if (result > 0) {
-            String tagsFormatted = formatTagsFeedback(tagsToFind);
             return new CommandResult(MESSAGE_SUCCESS
                     + "\n"
                     + tagsFormatted
                     + "\n"
                     + getMessageForPersonListShownSummary(result));
         } else {
-            return new CommandResult("No results found.");
+            return new CommandResult(MESSAGE_FAILURE
+                    + "\n"
+                    + tagsFormatted );
         }
     }
 
