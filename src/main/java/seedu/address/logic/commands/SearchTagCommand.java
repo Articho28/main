@@ -38,13 +38,10 @@ public class SearchTagCommand extends UndoableCommand {
      */
     @Override
     public CommandResult executeUndoableCommand() {
-        model.updateFilteredPersonList(personHasTags());
+        model.updateFilteredPersonList(personHasTags(tagsToFind));
         int result = model.getFilteredPersonList().size();
         if (result > 0) {
-            String tagsFormatted = tagsToFind.toString()
-                    .replace("[", " ")
-                    .replace("]", " ")
-                    .replace("[,", " ");
+            String tagsFormatted = formatTagsFeedback(tagsToFind);
             return new CommandResult(MESSAGE_SUCCESS
                     + "\n"
                     + tagsFormatted
@@ -60,10 +57,17 @@ public class SearchTagCommand extends UndoableCommand {
      * looking for.
      * @return
      */
-    public Predicate<Person> personHasTags() {
-        return person -> person.getTags().containsAll(tagsToFind);
+    public static Predicate<Person> personHasTags(Set<Tag> tagsToCheck) {
+        return person -> person.getTags().containsAll(tagsToCheck);
     }
 
+    public static String formatTagsFeedback(Set<Tag> tagsToFormat) {
+        String tagsFormatted = tagsToFormat.toString()
+                .replace("[", " ")
+                .replace("]", " ")
+                .replace("[,", " ");
+        return tagsFormatted;
+    }
 }
 
 
