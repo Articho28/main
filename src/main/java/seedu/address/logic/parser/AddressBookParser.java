@@ -33,6 +33,7 @@ import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.SettleCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.SplitCommand;
+import seedu.address.logic.commands.TransactionCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.WipeBalancesCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -233,6 +234,12 @@ public class AddressBookParser {
             return new RemindCommandParser().parse(arguments);
         case RemindCommand.COMMAND_SHORTCUT:
             return new RemindCommandParser().parse(arguments);
+
+        case TransactionCommand.COMMAND_WORD:
+            return new TransactionCommandParser().parse(arguments);
+
+        case TransactionCommand.COMMAND_SHORTCUT:
+            return new TransactionCommandParser().parse(arguments);
         //@@author
 
         default:
