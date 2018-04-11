@@ -228,10 +228,12 @@ public class AddressBookParser {
             return new ItemDeleteCommandParser().parse(arguments);
         //@@author
 
+        //@@author Articho28
         case MapCommand.COMMAND_WORD:
             return new MapCommand();
         case MapCommand.COMMAND_SHORTCUT:
             return new MapCommand();
+        //@@author
 
         //@@author pkuhanan
         case RemindCommand.COMMAND_WORD:

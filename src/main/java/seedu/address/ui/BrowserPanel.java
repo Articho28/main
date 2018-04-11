@@ -52,7 +52,6 @@ public class BrowserPanel extends UiPart<Region> {
     private void loadPersonPage(Person person) {
         loadPage(SEARCH_PAGE_URL + person.getName().fullName);
     }
-    //@@author Articho28
     private void loadPersonAddress(Person person) {
         loadPage (ADDRESS_SEARCH_PAGE_URL + person.getAddress().value);
     }
@@ -77,7 +76,7 @@ public class BrowserPanel extends UiPart<Region> {
     public void freeResources() {
         browser = null;
     }
-
+    
     @Subscribe
     private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
