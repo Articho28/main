@@ -34,6 +34,9 @@ all specified tags. This allows the user to have a quick overview of balances ow
 (e.g. view only amounts owed by friends). This, once more, contributes to the general purpose of TravelBanker, by
 giving the user the possibility to view only amounts that he/she deems relevant.
 
+* *Code contributed*: [https://github.com/CS2103JAN2018-T11-B4/main/blob/master/collated/functional/Articho28.md[Functional code]] [https://github.com/CS2103JAN2018-T11-B4/main/blob/master/collated/test/Articho28.md[Test code]]
+
+
 * *Other contributions*:
 
 ** Project management:
