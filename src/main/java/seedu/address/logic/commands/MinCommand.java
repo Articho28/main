@@ -13,8 +13,8 @@ import seedu.address.model.person.Person;
  */
 public class MinCommand extends Command {
 
-    public static final String COMMAND_WORD = "min";
-    public static final String COMMAND_SHORTCUT = "mn";
+    public static final String COMMAND_WORD = "maxborrowed";
+    public static final String COMMAND_SHORTCUT = "mb";
     public static final String MESSAGE_SUCCESS_FOUND = "The contact to which you owe the most money is: ";
     public static final String MESSAGE_SUCCESS_NO_RESULT = "Good news! You don't owe any money.";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds the person to which you owe the most money ";

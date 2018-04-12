@@ -10,11 +10,11 @@ import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.model.person.Person;
 
 /**
- * Finds the person that owes the most money
+ * Finds the person that owes you the most money.
  */
 public class MaxCommand extends Command {
-    public static final String COMMAND_WORD = "max";
-    public static final String COMMAND_SHORTCUT = "mx";
+    public static final String COMMAND_WORD = "maxlent";
+    public static final String COMMAND_SHORTCUT = "ml";
     public static final String MESSAGE_SUCCESS = "The contact who owes you the most money is: ";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds the person that owes the most money ";

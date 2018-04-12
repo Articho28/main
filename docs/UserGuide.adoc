@@ -69,6 +69,11 @@ Format: `a n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/BALANCE [t/TAG]...`
 
 [TIP]
 A person can have any number of tags (including 0)
+// tag::balanceExplained[]
+[NOTE]
+A positive balance means that the *contact* owes the *user.
+A negative balance means the *user* owes the *contact*.
+// end::balanceExplained[]
 
 Examples:
 
@@ -251,15 +256,19 @@ There is no need to save manually.
 Calculates your total balance. This value shows you the overall state of your finances: how much you owe minus
  how much you're owed. +
 Format: `balance` or `b`
+
+[NOTE]
+A positive balance means the user *is owed* money while a negative balance means the user generally *owes* money.
 // end::balance[]
+
 === Seeing all the contacts that owe you money: `debt` or `de` [Since v1.2]
 
-Lists all the contacts that owe you an amount.
+Lists all the contacts to which the user owes an amount.
 Format: `debt` or `de`
 
 === Seeing all the contacts to which you owe money: `lend` or `le` [Since v1.2]
 
-Lists all the contacts that owe you an amount.
+Lists all the contacts that owe the user an amount.
 Format: `lend` or `le`
 
 // tag::removetag[]
@@ -275,16 +284,16 @@ Examples:
 Remove the tags `owesMoney` and `friends` from the first person.
 // end::removetag[]
 
-=== Seeing which contact owes you the most: `max` or `mx` [Since v1.2]
+=== Seeing which contact owes you the most: `maxlent` or `ml` [Since v1.2]
 
 Lists the contact which owes you the most money. +
-Format: `max`
+Format: `maxlent` or `ml`
 
 // tag::min[]
-=== Seeing which contact owes you the least: `min` or `mi`[Since v1.2]
+=== Seeing which contact owes you the least: `maxborrowed` or `mb`[Since v1.2]
 
 Lists the contact to which you owe the most money. +
-Format: `min`
+Format: `maxborrowed` or `mb`
 // end::min[]
 
 // tag::sort[]
@@ -397,11 +406,14 @@ Opens the default email client with a generated email to the contact with the ba
 Format: `remind INDEX`
 // end::remind[]
 // tag::selectAddress[]
-=== View a contact's address on the map with `select` [Since v1.4]
+=== View a contact's address on the map with `select`, `maxborrowed` or `maxlent` [Since v1.4]
 
 Searches for the contact's address in the map displayed once that contact is selected.
 Format : `select INDEX`
+Format : `maxborrowed INDEX`
+Format : `maxlent INDEX`
 // end::selectAddress[]
+
 === Converts your balance in a desired currency: `convert` or `cv` [Since v1.4]`
 
 Converts an entries certain balance in a currency of your choice.
@@ -517,16 +529,18 @@ e.g.`select 2`
 // tag::removetag[]
 * *RemoveTag* : `removetag INDEX [t/TAG]...`
 // end::removetag[]
+// tag::searchTag[]
 * *SearchTag* : `searchtag t/TAG`
 e.g. `searchtag t/classmates t/friends`
+// end::searchTag[]
 * *Sort* : `sort KEYWORD_PREFIX/ORDER`
 * *Split* : `split INDEX1 [INDEX2...] m/MONEY`
 * *ItemShow* : `itemshow INDEX`
 * *ItemAdd* : `itemadd INDEX n/ITEM_NAME m/MONEY`
 * *ItemDelete* : `itemdelete PERSON_INDEX ITEM_INDEX`
-* *Max* : `max`
+* *Max* : `maxlent` or `ml`
 // tag::min[]
-* *Min* : `min`
+* *Min* : `maxborrowed` or `mb`
 // end::min[]
 * *Currency* : `currency c/`
 e.g. `currency c/USD`

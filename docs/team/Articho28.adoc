@@ -79,6 +79,8 @@ include::../UserGuide.adoc[tag=trip]
 
 include::../UserGuide.adoc[tag=colorTag]
 
+include::../UserGuide.adoc[tag=balanceExplained]
+
 
 == Contributions to the Developer Guide
 
