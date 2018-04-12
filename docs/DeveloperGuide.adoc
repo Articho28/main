@@ -230,7 +230,7 @@ Classes used by multiple components are in the `seedu.TravelBanker.commons` pack
 
 This section describes some noteworthy details on how certain features are implemented.
 
-// tag::undoredo[]
+// tag::posneg[]
 === List Positive/Negative feature
 ==== Current Implementation
 
@@ -259,17 +259,19 @@ public Predicate<Person> isPositiveBalance(){
 
 The negative balance works the same way just checking to see if the balance is less than 0.
 
-====Alternatives Considered
+==== Alternatives Considered
 
 For an alternative way, I considered creating a new empty list `positiveList` and then adding to `positiveList` whenever the balance is greater than 0. Then I was going to display positive list. However this did not end up working because I noticed that updating the flitered list needed a predicate function as a paramter which my approach would not have. Therefore I had to consider a different approach that involved a predicate function.
 
-====Future Additions
+==== Future Additions
 
 I can further refine the function to be much more powerful in filtering and listing out people. For instance, I could allow it to list people with whose names start with a specific letter because in an large addressbook, the user might want to quickly go through the addressbook, not ones who just have a postiive or negative balance.
 
 
 The function is a predicate function that checks to see if `a.getMoney().balance>=0` because the function `updateFilteredPersonList()` takes in a predicate parameter. In our function we see the predicate check to see if the person's money balance is positive and if so, it will be returned.
 
+//end::posneg[]
+//tag::undoredo[]
 === Undo/Redo feature
 ==== Current Implementation
 

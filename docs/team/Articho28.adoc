@@ -79,8 +79,11 @@ include::../UserGuide.adoc[tag=trip]
 
 include::../UserGuide.adoc[tag=colorTag]
 
+<<<<<<< HEAD
 include::../UserGuide.adoc[tag=balanceExplained]
 
+=======
+>>>>>>> upstream/master
 
 == Contributions to the Developer Guide
 
