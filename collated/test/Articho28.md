@@ -17,6 +17,62 @@
     }
 }
 ```
+###### /java/seedu/address/logic/parser/SearchTagCommandParserTest.java
+``` java
+
+package seedu.address.logic.parser;
+
+import static org.testng.Assert.assertEquals;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import org.junit.Test;
+import seedu.address.logic.commands.SearchTagCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.tag.Tag;
+
+/**
+ * Tests that the SeachTagCommandParser manipulates the input properly.
+ */
+public class SearchTagCommandParserTest {
+
+    public static final String TAG_NAME_1 = "friends";
+    public static final String TAG_NAME_2 = "colleagues";
+
+    private SearchTagCommandParser searchTagCommandParser = new SearchTagCommandParser();
+
+    /**
+     * Test for single input.
+     * @throws ParseException
+     */
+    @Test
+    public void valid_args_singleTag_tagsAreEqual() throws ParseException {
+        Set<Tag> tagsToFind = new HashSet<>();
+        tagsToFind.add(new Tag(TAG_NAME_1));
+        SearchTagCommand searchTagCommand = searchTagCommandParser.parse( " " + PREFIX_TAG + TAG_NAME_1);
+        assertEquals(searchTagCommand.getTagsToFind(), tagsToFind);
+    }
+
+    /**
+     * Tests for multiple input.
+     * @throws ParseException
+     */
+    @Test
+    public void valid_args_multipleTag_tagsAreEqual() throws ParseException {
+        Set<Tag> multipleTagsToFind = new HashSet<>();
+        multipleTagsToFind.add(new Tag(TAG_NAME_1));
+        multipleTagsToFind.add(new Tag(TAG_NAME_2));
+        SearchTagCommand searchTagCommand = searchTagCommandParser.parse(" "
+                + PREFIX_TAG + TAG_NAME_1
+                + " "
+                + PREFIX_TAG + TAG_NAME_2);
+        assertEquals(searchTagCommand.getTagsToFind(), multipleTagsToFind);
+
+    }
+}
+```
 ###### /java/seedu/address/logic/commands/SearchTagCommandTest.java
 ``` java
 
@@ -220,6 +276,7 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.UndoRedoStack;
 import seedu.address.model.Model;

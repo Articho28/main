@@ -67,6 +67,7 @@ public class SearchTagCommandParser implements Parser<SearchTagCommand> {
         Set<Tag> tagsToFind;
         try {
             tagsToFind = parseTags(argMultimap.getAllValues(PREFIX_TAG));
+            if (tagsToFind.isEmpty()) throw new ParseException("Please insert tags in the tag field: t/");
         } catch (IllegalValueException ive) {
             throw new ParseException(ive.getMessage(), ive);
         }
@@ -244,6 +245,10 @@ public class SearchTagCommand extends UndoableCommand {
      */
     public SearchTagCommand(Set<Tag> tags) {
         this.tagsToFind = tags;
+    }
+
+    public Set<Tag> getTagsToFind() {
+        return tagsToFind;
     }
 
     /**
