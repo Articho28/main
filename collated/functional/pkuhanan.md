@@ -1,123 +1,142 @@
 # pkuhanan
-###### /java/seedu/address/logic/commands/EditCommand.java
-``` java
-        public void setMoney(Money money) {
-            this.money = money;
-        }
-
-        public Optional<Money> getMoney() {
-            return Optional.ofNullable(money);
-        }
+###### /resources/view/PersonListCard.fxml
+``` fxml
+      <Label fx:id="money" styleClass="cell_small_label" text="\$money" />
 ```
-###### /java/seedu/address/logic/commands/MaxCommand.java
+###### /java/seedu/address/ui/PersonCard.java
 ``` java
-package seedu.address.logic.commands;
+    @FXML
+    private Label money;
+```
+###### /java/seedu/address/logic/parser/AddressBookParser.java
+``` java
+        case MaxCommand.COMMAND_WORD:
+            return new MaxCommand();
 
-import java.util.List;
+        case MaxCommand.COMMAND_SHORTCUT:
+            return new MaxCommand();
+```
+###### /java/seedu/address/logic/parser/AddressBookParser.java
+``` java
+        case SettleCommand.COMMAND_WORD:
+            return new SettleCommandParser().parse(arguments);
 
-import seedu.address.commons.core.EventsCenter;
+        case SettleCommand.COMMAND_SHORTCUT:
+            return new SettleCommandParser().parse(arguments);
+```
+###### /java/seedu/address/logic/parser/AddressBookParser.java
+``` java
+        case RemindCommand.COMMAND_WORD:
+            return new RemindCommandParser().parse(arguments);
+        case RemindCommand.COMMAND_SHORTCUT:
+            return new RemindCommandParser().parse(arguments);
+
+        case TransactionCommand.COMMAND_WORD:
+            return new TransactionCommandParser().parse(arguments);
+
+        case TransactionCommand.COMMAND_SHORTCUT:
+            return new TransactionCommandParser().parse(arguments);
+```
+###### /java/seedu/address/logic/parser/ParserUtil.java
+``` java
+    /**
+     * Parses a {@code String money} into an {@code Money}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws IllegalValueException if the given {@code money} is invalid.
+     */
+    public static Money parseMoney(String money) throws IllegalValueException {
+        requireNonNull(money);
+        String trimmedMoney = money.trim();
+        if (!Money.isValidMoney(trimmedMoney)) {
+            throw new IllegalValueException(Email.MESSAGE_EMAIL_CONSTRAINTS);
+        }
+        return new Money(trimmedMoney);
+    }
+
+    /**
+     * Parses a {@code Optional<String> money} into an {@code Optional<money>} if {@code money} is present.
+     * See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<Money> parseMoney(Optional<String> money) throws IllegalValueException {
+        requireNonNull(money);
+        return money.isPresent() ? Optional.of(parseMoney(money.get())) : Optional.empty();
+    }
+```
+###### /java/seedu/address/logic/parser/TransactionCommandParser.java
+``` java
+package seedu.address.logic.parser;
+
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.model.money.Money.MONEY_VALIDATION_REGEX;
+
 import seedu.address.commons.core.index.Index;
-
-import seedu.address.commons.events.ui.JumpToListRequestEvent;
-import seedu.address.model.person.Person;
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.TransactionCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Finds the person that owes the most money
+ * Parses input arguments and creates a new TransactionCommand object
  */
-public class MaxCommand extends Command {
-    public static final String COMMAND_WORD = "max";
-    public static final String COMMAND_SHORTCUT = "mx";
-    public static final String MESSAGE_SUCCESS = "The contact who owes you the most money is: ";
+public class TransactionCommandParser {
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds the person that owes the most money ";
+    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    /**
+     * Parses the given {@code String} of arguments in the context of the TransactionCommand
+     * and returns a TransactionCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
+    public TransactionCommand parse(String args) throws ParseException {
+        try {
+            String trimmedArgs = args.trim();
+            String[] currencyKeywords = trimmedArgs.split(" ");
 
-    @Override
-    public CommandResult execute() {
-        List<Person> lastShownList = model.getFilteredPersonList();
-        Index index = Index.fromZeroBased(0);
-        Double highestDebt = 0.0;
+            Index index = Index.fromOneBased(Integer.parseInt(currencyKeywords[0]));
+            String amount = currencyKeywords[1].toUpperCase();
 
-        for (int i = 0; i < lastShownList.size(); i++) {
-            Person person = lastShownList.get(i);
-            if (person.getMoney().balance > highestDebt) {
-                index = Index.fromZeroBased(i);
-                highestDebt = person.getMoney().balance;
+            if (!StringUtil.isNonZeroUnsignedInteger(currencyKeywords[0]) || !amount.matches(MONEY_VALIDATION_REGEX)) {
+                throw new IllegalValueException(MESSAGE_INVALID_INDEX);
             }
-        }
 
-        EventsCenter.getInstance().post(new JumpToListRequestEvent(index));
-        return new CommandResult(MESSAGE_SUCCESS + lastShownList.get(index.getZeroBased()).getName());
+            return new TransactionCommand(index, Double.parseDouble(amount));
+        } catch (IllegalValueException ive) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, TransactionCommand.MESSAGE_USAGE));
+        } catch (NumberFormatException nfe) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, TransactionCommand.MESSAGE_USAGE));
+        }
     }
 }
 ```
-###### /java/seedu/address/logic/commands/RemindCommand.java
+###### /java/seedu/address/logic/parser/RemindCommandParser.java
 ``` java
-package seedu.address.logic.commands;
+package seedu.address.logic.parser;
 
-import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import java.awt.Desktop;
-import java.net.URI;
-import java.util.List;
-
-import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.events.ui.JumpToListRequestEvent;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.person.Person;
-
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.commands.RemindCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Helps the user send a reminder by email to the contact
+ * Parses input arguments and creates a new RemindCommand object
  */
-public class RemindCommand extends Command {
-    public static final String COMMAND_WORD = "remind";
-    public static final String COMMAND_SHORTCUT = "rm";
-    public static final String MESSAGE_SUCCESS = "Generated email for contact: ";
-    public static final String MESSAGE_FAILURE = " does not owe you any money";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds the person that owes the most money ";
-
-    private final Index index;
-    private Person person;
-
+public class RemindCommandParser implements Parser<RemindCommand> {
     /**
-     * @param index of the person in the filtered person list to remind
+     * Parses the given {@code String} of arguments in the context of the RemindCommand
+     * and returns a RemindCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
      */
-    public RemindCommand(Index index) {
-        requireNonNull(index);
-
-        this.index = index;
-    }
-
-    @Override
-    public CommandResult execute() throws CommandException {
-        List<Person> lastShownList = model.getFilteredPersonList();
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-        person = lastShownList.get(index.getZeroBased());
-        EventsCenter.getInstance().post(new JumpToListRequestEvent(index));
-
-        if (person.getMoney().balance > 0) {
-            try {
-                Desktop desktop;
-                if (Desktop.isDesktopSupported()
-                        && (desktop = Desktop.getDesktop()).isSupported(Desktop.Action.MAIL)) {
-                    String uri = "mailto:" + person.getEmail()
-                            + "?subject=Reminder:%20Please%20pay%20me%20back&body=Please%20pay%20me%20back:%20$"
-                            + person.getMoney();
-                    URI mailto = new URI(uri);
-                    desktop.mail(mailto);
-                } else {
-                    throw new AssertionError("No email client configured");
-                }
-                return new CommandResult(MESSAGE_SUCCESS + person.getName() + "<" + person.getEmail() + ">");
-            } catch (Exception e) {
-                throw new AssertionError("Problem sending email");
-            }
-        } else {
-            return new CommandResult(person.getName() + MESSAGE_FAILURE);
+    public RemindCommand parse(String args) throws ParseException {
+        try {
+            Index index = ParserUtil.parseIndex(args);
+            return new RemindCommand(index);
+        } catch (IllegalValueException ive) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemindCommand.MESSAGE_USAGE));
         }
     }
 }
@@ -225,138 +244,146 @@ public class TransactionCommand extends UndoableCommand {
     }
 }
 ```
-###### /java/seedu/address/logic/parser/AddressBookParser.java
+###### /java/seedu/address/logic/commands/MaxCommand.java
 ``` java
-        case MaxCommand.COMMAND_WORD:
-            return new MaxCommand();
+package seedu.address.logic.commands;
 
-        case MaxCommand.COMMAND_SHORTCUT:
-            return new MaxCommand();
-```
-###### /java/seedu/address/logic/parser/AddressBookParser.java
-``` java
-        case SettleCommand.COMMAND_WORD:
-            return new SettleCommandParser().parse(arguments);
+import java.util.List;
 
-        case SettleCommand.COMMAND_SHORTCUT:
-            return new SettleCommandParser().parse(arguments);
-```
-###### /java/seedu/address/logic/parser/AddressBookParser.java
-``` java
-        case RemindCommand.COMMAND_WORD:
-            return new RemindCommandParser().parse(arguments);
-        case RemindCommand.COMMAND_SHORTCUT:
-            return new RemindCommandParser().parse(arguments);
-
-        case TransactionCommand.COMMAND_WORD:
-            return new TransactionCommandParser().parse(arguments);
-
-        case TransactionCommand.COMMAND_SHORTCUT:
-            return new TransactionCommandParser().parse(arguments);
-```
-###### /java/seedu/address/logic/parser/ParserUtil.java
-``` java
-    /**
-     * Parses a {@code String money} into an {@code Money}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws IllegalValueException if the given {@code money} is invalid.
-     */
-    public static Money parseMoney(String money) throws IllegalValueException {
-        requireNonNull(money);
-        String trimmedMoney = money.trim();
-        if (!Money.isValidMoney(trimmedMoney)) {
-            throw new IllegalValueException(Email.MESSAGE_EMAIL_CONSTRAINTS);
-        }
-        return new Money(trimmedMoney);
-    }
-
-    /**
-     * Parses a {@code Optional<String> money} into an {@code Optional<money>} if {@code money} is present.
-     * See header comment of this class regarding the use of {@code Optional} parameters.
-     */
-    public static Optional<Money> parseMoney(Optional<String> money) throws IllegalValueException {
-        requireNonNull(money);
-        return money.isPresent() ? Optional.of(parseMoney(money.get())) : Optional.empty();
-    }
-```
-###### /java/seedu/address/logic/parser/RemindCommandParser.java
-``` java
-package seedu.address.logic.parser;
-
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
+import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.logic.commands.RemindCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
+
+import seedu.address.commons.events.ui.JumpToListRequestEvent;
+import seedu.address.model.person.Person;
 
 /**
- * Parses input arguments and creates a new RemindCommand object
+ * Finds the person that owes you the most money.
  */
-public class RemindCommandParser implements Parser<RemindCommand> {
-    /**
-     * Parses the given {@code String} of arguments in the context of the RemindCommand
-     * and returns a RemindCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
-     */
-    public RemindCommand parse(String args) throws ParseException {
-        try {
-            Index index = ParserUtil.parseIndex(args);
-            return new RemindCommand(index);
-        } catch (IllegalValueException ive) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemindCommand.MESSAGE_USAGE));
-        }
-    }
-}
-```
-###### /java/seedu/address/logic/parser/TransactionCommandParser.java
-``` java
-package seedu.address.logic.parser;
+public class MaxCommand extends Command {
+    public static final String COMMAND_WORD = "maxlent";
+    public static final String COMMAND_SHORTCUT = "ml";
+    public static final String MESSAGE_SUCCESS = "The contact who owes you the most money is: ";
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.model.money.Money.MONEY_VALIDATION_REGEX;
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds the person that owes the most money ";
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.commands.TransactionCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
+    @Override
+    public CommandResult execute() {
+        List<Person> lastShownList = model.getFilteredPersonList();
+        Index index = Index.fromZeroBased(0);
+        Double highestDebt = 0.0;
 
-/**
- * Parses input arguments and creates a new TransactionCommand object
- */
-public class TransactionCommandParser {
-
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    /**
-     * Parses the given {@code String} of arguments in the context of the TransactionCommand
-     * and returns a TransactionCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
-     */
-    public TransactionCommand parse(String args) throws ParseException {
-        try {
-            String trimmedArgs = args.trim();
-            String[] currencyKeywords = trimmedArgs.split(" ");
-
-            Index index = Index.fromOneBased(Integer.parseInt(currencyKeywords[0]));
-            String amount = currencyKeywords[1].toUpperCase();
-
-            if (!StringUtil.isNonZeroUnsignedInteger(currencyKeywords[0]) || !amount.matches(MONEY_VALIDATION_REGEX)) {
-                throw new IllegalValueException(MESSAGE_INVALID_INDEX);
+        for (int i = 0; i < lastShownList.size(); i++) {
+            Person person = lastShownList.get(i);
+            if (person.getMoney().balance > highestDebt) {
+                index = Index.fromZeroBased(i);
+                highestDebt = person.getMoney().balance;
             }
+        }
 
-            return new TransactionCommand(index, Double.parseDouble(amount));
-        } catch (IllegalValueException ive) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, TransactionCommand.MESSAGE_USAGE));
-        } catch (NumberFormatException nfe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, TransactionCommand.MESSAGE_USAGE));
+        EventsCenter.getInstance().post(new JumpToListRequestEvent(index));
+        return new CommandResult(MESSAGE_SUCCESS + lastShownList.get(index.getZeroBased()).getName());
+    }
+}
+```
+###### /java/seedu/address/logic/commands/RemindCommand.java
+``` java
+package seedu.address.logic.commands;
+
+import static java.util.Objects.requireNonNull;
+
+import java.awt.Desktop;
+import java.net.URI;
+import java.util.List;
+
+import seedu.address.commons.core.EventsCenter;
+import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
+import seedu.address.commons.events.ui.JumpToListRequestEvent;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.person.Person;
+
+
+/**
+ * Helps the user send a reminder by email to the contact
+ */
+public class RemindCommand extends Command {
+    public static final String COMMAND_WORD = "remind";
+    public static final String COMMAND_SHORTCUT = "rm";
+    public static final String MESSAGE_SUCCESS = "Generated email for contact: ";
+    public static final String MESSAGE_FAILURE = " does not owe you any money";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds the person that owes the most money ";
+
+    private final Index index;
+    private Person person;
+
+    /**
+     * @param index of the person in the filtered person list to remind
+     */
+    public RemindCommand(Index index) {
+        requireNonNull(index);
+
+        this.index = index;
+    }
+
+    @Override
+    public CommandResult execute() throws CommandException {
+        List<Person> lastShownList = model.getFilteredPersonList();
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+        person = lastShownList.get(index.getZeroBased());
+        EventsCenter.getInstance().post(new JumpToListRequestEvent(index));
+
+        if (person.getMoney().balance > 0) {
+            try {
+                Desktop desktop;
+                if (Desktop.isDesktopSupported()
+                        && (desktop = Desktop.getDesktop()).isSupported(Desktop.Action.MAIL)) {
+                    String uri = "mailto:" + person.getEmail()
+                            + "?subject=Reminder:%20Please%20pay%20me%20back&body=Please%20pay%20me%20back:%20$"
+                            + person.getMoney();
+                    URI mailto = new URI(uri);
+                    desktop.mail(mailto);
+                } else {
+                    throw new AssertionError("No email client configured");
+                }
+                return new CommandResult(MESSAGE_SUCCESS + person.getName() + "<" + person.getEmail() + ">");
+            } catch (Exception e) {
+                throw new AssertionError("Problem sending email");
+            }
+        } else {
+            return new CommandResult(person.getName() + MESSAGE_FAILURE);
         }
     }
 }
+```
+###### /java/seedu/address/logic/commands/EditCommand.java
+``` java
+        public void setMoney(Money money) {
+            this.money = money;
+        }
+
+        public Optional<Money> getMoney() {
+            return Optional.ofNullable(money);
+        }
+```
+###### /java/seedu/address/storage/XmlAdaptedPerson.java
+``` java
+    @XmlElement
+    private String balance;
+```
+###### /java/seedu/address/storage/XmlAdaptedPerson.java
+``` java
+        if (!Money.isValidMoney(this.balance)) {
+            throw new IllegalValueException(Money.MESSAGE_MONEY_CONSTRAINTS);
+        }
+        final Money balance = new Money(this.balance);
+```
+###### /java/seedu/address/model/person/Person.java
+``` java
+    public Money getMoney() {
+        return money;
+    }
 ```
 ###### /java/seedu/address/model/money/Money.java
 ``` java
@@ -413,27 +440,4 @@ public class Money {
                 || (other instanceof Money // instanceof handles nulls
                 && this.value.equals(((Money) other).value)); // state check
     }
-```
-###### /java/seedu/address/model/person/Person.java
-``` java
-    public Money getMoney() {
-        return money;
-    }
-```
-###### /java/seedu/address/storage/XmlAdaptedPerson.java
-``` java
-    @XmlElement
-    private String balance;
-```
-###### /java/seedu/address/storage/XmlAdaptedPerson.java
-``` java
-        if (!Money.isValidMoney(this.balance)) {
-            throw new IllegalValueException(Money.MESSAGE_MONEY_CONSTRAINTS);
-        }
-        final Money balance = new Money(this.balance);
-```
-###### /java/seedu/address/ui/PersonCard.java
-``` java
-    @FXML
-    private Label money;
 ```
