@@ -601,29 +601,18 @@ e.g.`select 2`
 // tag::removetag[]
 * *RemoveTag* : `removetag INDEX [t/TAG]...`
 // end::removetag[]
-<<<<<<< HEAD
 // tag::searchTag[]
 * *SearchTag* : `searchtag t/TAG`
 e.g. `searchtag t/classmates t/friends`
 // end::searchTag[]
-=======
-* *SearchTag* : `searchtag t/TAG`
-e.g. `searchtag t/classmates t/friends`
->>>>>>> upstream/master
 * *Sort* : `sort KEYWORD_PREFIX/ORDER`
 * *Split* : `split INDEX1 [INDEX2...] m/MONEY`
 * *ItemShow* : `itemshow INDEX`
 * *ItemAdd* : `itemadd INDEX n/ITEM_NAME m/MONEY`
 * *ItemDelete* : `itemdelete PERSON_INDEX ITEM_INDEX`
-<<<<<<< HEAD
-* *Max* : `maxlent` or `ml`
+* *MaxLent* : `maxlent` or `ml`
 // tag::min[]
-* *Min* : `maxborrowed` or `mb`
-=======
-* *Max* : `max`
-// tag::min[]
-* *Min* : `min`
->>>>>>> upstream/master
+* *MaxBorrowed* : `maxborrowed` or `mb`
 // end::min[]
 * *Currency* : `currency c/`
 e.g. `currency c/USD`
