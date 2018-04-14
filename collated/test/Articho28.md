@@ -73,7 +73,6 @@ public class SearchTagCommandParserTest {
         assertEquals(searchTagCommand.getTagsToFind(), multipleTagsToFind);
 
     }
-
     /**
      * Throws exception when no tags are provided.
      */
