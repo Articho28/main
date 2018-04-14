@@ -35,6 +35,10 @@ public class SearchTagCommand extends UndoableCommand {
         this.tagsToFind = tags;
     }
 
+    public Set<Tag> getTagsToFind() {
+        return tagsToFind;
+    }
+
     /**
      * This command lists all the persons which match the search criteria provided by the user.
      * @return
