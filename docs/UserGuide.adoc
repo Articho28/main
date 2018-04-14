@@ -273,17 +273,6 @@ Lists all the contacts that owe you an amount.
 Format: `lend` or `le`
 // end::lend[]
 
-
-=== Seeing all the contacts that owe you money: `debt` or `de` [Since v1.2]
-
-Lists all the contacts to which the user owes an amount.
-Format: `debt` or `de`
-
-=== Seeing all the contacts to which you owe money: `lend` or `le` [Since v1.2]
-
-Lists all the contacts that owe the user an amount.
-Format: `lend` or `le`
-
 // tag::removetag[]
 === Remove Tags: `removetag` or `rt` [Since v1.2]
 
@@ -360,6 +349,11 @@ search once more.
 Format: `map` or `mp`
 // end::map[]
 
+=== Settling up your balance with a contact: `settle` or `stl`[Since v1.3]
+
+Sets the balance of the specified contact to 0. +
+Format: `settle INDEX`
+
 // tag::item[]
 === Showing items related to a person : `itemshow` or `is` [Since v1.4]
 
@@ -428,6 +422,7 @@ Format: `remind INDEX`
 // end::remind[]
 
 // tag::selectAddress[]
+
 === View a contact's address on the map with `select`, `maxborrowed` or `maxlent` [Since v1.4]
 
 Searches for the contact's address in the map displayed once that contact is selected. To show the ATM map
@@ -438,6 +433,7 @@ Format : `maxlent`
 // end::selectAddress[]
 
 // tag::convert[]
+
 === Converts your balance in a desired currency: `convert` or `cv` [Since v1.4]`
 
 Converts an entries certain balance in a currency of your choice.
@@ -448,6 +444,7 @@ Example: `convert 1 SGD USD`
 // end::convert[]
 
 // tag::guiColorTag[]
+
 === All similar tags now have a unique color [Since v1.5rc]
 
 All similar tags found in TravelBanker now have a color specific to it. Tags can be used to associate
@@ -465,12 +462,14 @@ Example: `st t/colleagues t/friends`
 // end::searchTag[]
 
 // tag::dataencryption[]
+
 === Encrypting data files `[coming in v2.0]`
 
 _{explain how the user can enable/disable data encryption}_
 // end::dataencryption[]
 
 // tag::interest[]
+
 === Applies an interest rate to your balance: `interest FACTOR` or `i FACTOR` [Coming in v2.0]
 
 Displays your balance with an applied interest rate.
@@ -478,6 +477,7 @@ Format: `interest FACTOR` or `i FACTOR`
 // end::interest[]
 
 // tag::transaction[]
+
 === Report a transaction and automatically update a contact's balance accordingly: `transaction` or `t` [Since v1.5rc]
 
 Updates the contacts balance with the correct new balance after the transaction.
@@ -495,6 +495,7 @@ Format: `trip [DESTINATION]`
 // end::trip[]
 
 // tag::colorTag[]
+
 === Change the color of a specific tag in the address book [Coming in V2.0]
 
 The user can select the color he wants a specific tag to be.
@@ -542,6 +543,6 @@ e.g. `searchtag t/classmates t/friends`
 * *ItemDelete* : `itemdelete PERSON_INDEX ITEM_INDEX`
 * *MaxLent* : `maxlent` or `ml`
 * *MaxBorrowed* : `maxborrowed` or `mb`
-* *Currency* : `currency c/`
-e.g. `currency c/USD`
+* *Currency* : `convert c/`
+e.g. `currency INDEX TO FROM
 
