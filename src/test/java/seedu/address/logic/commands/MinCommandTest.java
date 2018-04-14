@@ -3,6 +3,7 @@
 package seedu.address.logic.commands;
 
 import static junit.framework.TestCase.assertTrue;
+import static org.testng.Assert.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -11,7 +12,6 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
-
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.UndoRedoStack;
 import seedu.address.model.Model;
@@ -67,6 +67,7 @@ public class MinCommandTest {
 
     /**
      * Finds the same person and checks if their balance is the same.
+     *
      * @throws DuplicatePersonException
      * @throws PersonNotFoundException
      */
@@ -82,8 +83,23 @@ public class MinCommandTest {
         assertTrue(actualPersonSelected.getMoney().value == expectedPersonSelected.getMoney().value);
     }
 
+    //@@ author
+    @Test
+    public void executes_updatedBalanceAccordingly() throws Exception {
+        model.getFilteredPersonList().get(0).setMoney(new Money("-100"));
+
+        MinCommand minCommand = new MinCommand();
+        minCommand.setData(model, new CommandHistory(), new UndoRedoStack());
+        CommandResult commandResult = minCommand.execute();
+
+        assertEquals(commandResult.feedbackToUser,
+                MinCommand.MESSAGE_SUCCESS_FOUND + model.getFilteredPersonList().get(0).getName());
+    }
+
+    //@@author Articho28
     /**
      * Gets the index number of the person with the lowest balance. Returns -1 if all balances are non-negative.
+     *
      * @param addressBook
      * @return
      */
@@ -107,6 +123,7 @@ public class MinCommandTest {
 
     /**
      * Inserts a person with a negative balance instead
+     *
      * @param modelToChange
      * @param toReplace
      * @param money
@@ -114,7 +131,7 @@ public class MinCommandTest {
      * @throws DuplicatePersonException
      */
 
-    public void insertNegativeBalance(Model modelToChange, Person toReplace,  Money money)
+    public void insertNegativeBalance(Model modelToChange, Person toReplace, Money money)
             throws PersonNotFoundException, DuplicatePersonException {
         Person edited = new Person(toReplace.getName(),
                 toReplace.getPhone(),
@@ -131,22 +148,5 @@ public class MinCommandTest {
      */
     static void assertExecutionSuccess(Person expectedSelection, Person actualSelection) {
         assertTrue(expectedSelection.equals(actualSelection));
-
-import seedu.address.model.UserPrefs;
-import seedu.address.model.money.Money;
-
-public class MinCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-
-    @Test
-    public void executes_updatedBalanceAccordingly() throws Exception {
-        model.getFilteredPersonList().get(0).setMoney(new Money("-100"));
-
-        MinCommand minCommand = new MinCommand();
-        minCommand.setData(model, new CommandHistory(), new UndoRedoStack());
-        CommandResult commandResult = minCommand.execute();
-
-        assertEquals(commandResult.feedbackToUser,
-                MinCommand.MESSAGE_SUCCESS_FOUND + model.getFilteredPersonList().get(0).getName());
     }
 }
