@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.junit.Test;
+
 import seedu.address.logic.commands.SearchTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
@@ -28,7 +29,7 @@ public class SearchTagCommandParserTest {
      * @throws ParseException
      */
     @Test
-    public void valid_args_singleTag_tagsAreEqual() throws ParseException {
+    public void validArgsSingleTagInputIsEqual() throws ParseException {
         Set<Tag> tagsToFind = new HashSet<>();
         tagsToFind.add(new Tag(TAG_NAME_1));
         SearchTagCommand searchTagCommand = searchTagCommandParser.parse( " " + PREFIX_TAG + TAG_NAME_1);
@@ -40,7 +41,7 @@ public class SearchTagCommandParserTest {
      * @throws ParseException
      */
     @Test
-    public void valid_args_multipleTag_tagsAreEqual() throws ParseException {
+    public void validArgsMultipleTagsAreEqual() throws ParseException {
         Set<Tag> multipleTagsToFind = new HashSet<>();
         multipleTagsToFind.add(new Tag(TAG_NAME_1));
         multipleTagsToFind.add(new Tag(TAG_NAME_2));
