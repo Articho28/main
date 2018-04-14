@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.UndoRedoStack;
 import seedu.address.model.Model;
@@ -59,7 +60,8 @@ public class MinCommandTest {
     @Test
     public void executeFindsNoResults() {
         if (indexOfLowestBalance == -1) {
-            assertCommandSuccess(minCommandNoResultsFound, model, MinCommand.MESSAGE_SUCCESS_NO_RESULT, expectedModelNoResultsFound);
+            assertCommandSuccess(minCommandNoResultsFound, model,
+                    MinCommand.MESSAGE_SUCCESS_NO_RESULT, expectedModelNoResultsFound);
         }
     }
 
@@ -111,7 +113,9 @@ public class MinCommandTest {
      * @throws PersonNotFoundException
      * @throws DuplicatePersonException
      */
-    public void insertNegativeBalance(Model modelToChange, Person toReplace,  Money money) throws PersonNotFoundException, DuplicatePersonException {
+
+    public void insertNegativeBalance(Model modelToChange, Person toReplace,  Money money)
+            throws PersonNotFoundException, DuplicatePersonException {
         Person edited = new Person(toReplace.getName(),
                 toReplace.getPhone(),
                 toReplace.getEmail(),
@@ -121,11 +125,11 @@ public class MinCommandTest {
                 toReplace.getItems());
         modelToChange.updatePerson(toReplace, edited);
     }
-    
+
     /**
      * Checks if selected people are the same in both models.
      */
-    static public void assertExecutionSuccess(Person expectedSelection, Person actualSelection) {
+    static void assertExecutionSuccess(Person expectedSelection, Person actualSelection) {
         assertTrue(expectedSelection.equals(actualSelection));
     }
 }
