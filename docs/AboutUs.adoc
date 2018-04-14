@@ -3,7 +3,7 @@
 :imagesDir: images
 :stylesDir: stylesheets
 
-TravelBanker - v1.5 was developed by CS2103 Team T11-B4 during their study at National University of Singapore.
+TravelBanker - v1.5 was developed by CS2103 Team T11-B4 during their study at the National University of Singapore.
 
 == Project Team
 
