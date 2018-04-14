@@ -1128,8 +1128,9 @@ See this https://github.com/se-edu/TravelBanker-level4/pull/599[PR] for the step
 
 [appendix]
 == Product Scope
-
+// tag::productScope[]
 *Target user profile*:
+// end::productScope[]
 
 * has a need to manage a significant number of contacts
 * prefer desktop apps over other types
@@ -1137,6 +1138,7 @@ See this https://github.com/se-edu/TravelBanker-level4/pull/599[PR] for the step
 * prefers typing over mouse input
 * is reasonably comfortable using CLI apps
 // tag::productScope[]
+
 * has a need to manage finances with fellow contacts
 * has a need to keep track of personal balance
 * has a need to keep track of transactions between contacts
@@ -1229,28 +1231,25 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |user | see to which of my contacts do I owe money |
 
-|`* *` |user | see which contact owes me the most money. |
+|`* *` |user | see which of my contacts owes me the most money. |
 
-|`* *` |user | see to which contact I owe the most money. |
-
-
-| `* * *`|user | see which contact owes me the most money |
+|`* *` |user | see to which of my contacts do I owe the most money. |
 
 | `* *` |user | see a list of people with specific tags | have an overview of the money a group owes me
 
 | `*` |user | see the address of a user|
 
-
 // end::userStories[]
+
 |`* *` |user | see for which items/reasons do I owe a contact / a contact owes me |
 
 |`* *` |user | add an item/reason under a specified person |
 
 |`* *` |user | delete an item/reason from a specified person |
 // tag::userStories[]
-|`*` |user | choose the balance the currency that I am owed |
+|`*` |user | choose the currency in which I want to see my balance displayed |
 
-|`*` |user | convert my balance into a different currency |
+|`* *` |user | convert my balance into a different currency |
 
 |`*` |user | calculate the amount I am owed/I owe with an applied interest rate |
 

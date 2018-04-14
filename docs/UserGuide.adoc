@@ -249,13 +249,14 @@ Format: `exit`
 TravelBanker data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
-// tag::dataencryption[]
 // tag::balance[]
 === Checking overall balance: `balance` or `b` [Since v1.2]
 
 Calculates your total balance. This value shows you the overall state of your finances: how much you owe minus
  how much you're owed. +
 Format: `balance` or `b`
+[NOTE]
+A positive balance means the user *is owed* money while a negative balance means the user generally *owes* money.
 // end::balance[]
 
 // tag::debt[]
@@ -263,7 +264,6 @@ Format: `balance` or `b`
 
 Lists all the contacts that owe you an amount.
 Format: `debt` or `de`
-
 // end::debt[]
 
 // tag::lend[]
@@ -273,9 +273,6 @@ Lists all the contacts that owe you an amount.
 Format: `lend` or `le`
 // end::lend[]
 
-[NOTE]
-A positive balance means the user *is owed* money while a negative balance means the user generally *owes* money.
-// end::balance[]
 
 === Seeing all the contacts that owe you money: `debt` or `de` [Since v1.2]
 
@@ -306,17 +303,10 @@ Lists the contact which owes you the most money. +
 Format: `maxlent` or `ml`
 
 // tag::min[]
-<<<<<<< HEAD
 === Seeing which contact owes you the least: `maxborrowed` or `mb`[Since v1.2]
 
-Lists the contact to which you owe the most money. +
+Lists the contact to which you owe the most money. A message appears if user does not have any debts  +
 Format: `maxborrowed` or `mb`
-=======
-=== Seeing which contact owes you the least: `min` or `mi`[Since v1.2]
-
-Lists the contact to which you owe the most money. +
-Format: `min`
->>>>>>> upstream/master
 // end::min[]
 
 // tag::sort[]
@@ -361,25 +351,12 @@ Format: `wipe` +
 Format: `w`
 // end::wipe[]
 
-=== Settling up your balance with a contact: `settle` or `stl`[Since v1.3]
-
-Sets the balance of the specified contact to 0. +
-Format: `settle INDEX`
 // tag::map[]
 === Searching for the nearest ATM : `map` or `mp` [Since v1.3]
 
-Displays a search for the nearest ATM in the browser panel.
-Format: `map` or `mp`
-// end::map[]
-
-=== Settling up your balance with a contact: `settle` or `stl`[Since v1.3]
-
-Sets the balance of the specified contact to 0. +
-Format: `settle INDEX`
-// tag::map[]
-=== Searching for the nearest ATM : `map` or `mp` [Since v1.3]
-
-Displays a search for the nearest ATM in the browser panel.
+Displays a search for the nearest ATM in the browser panel. The map will launch by default upon
+opening the app. If the browser panel displays something different, simply type `map` to view the
+search once more.
 Format: `map` or `mp`
 // end::map[]
 
@@ -442,104 +419,63 @@ Examples:
 Sets the balance of the specified contact to 0. +
 Format: `settle INDEX`
 // end::settle[]
-// tag::remind[]
 
+// tag::remind[]
 === Remind a contact to pay their balance: `remind` or `rm`[Since v1.4]
 
 Opens the default email client with a generated email to the contact with the balance in the message.
 Format: `remind INDEX`
 // end::remind[]
+
 // tag::selectAddress[]
-<<<<<<< HEAD
 === View a contact's address on the map with `select`, `maxborrowed` or `maxlent` [Since v1.4]
 
-Searches for the contact's address in the map displayed once that contact is selected.
+Searches for the contact's address in the map displayed once that contact is selected. To show the ATM map
+once more, refer to `map` command.
 Format : `select INDEX`
-Format : `maxborrowed INDEX`
-Format : `maxlent INDEX`
+Format : `maxborrowed`
+Format : `maxlent`
 // end::selectAddress[]
 
-=== Converts your balance in a desired currency: `convert` or `cv` [Since v1.4]`
-=======
-=== View a contact's address on the map with `select` [Since v1.4]
-
-Searches for the contact's address in the map displayed once that contact is selected.
-Format : `select INDEX`
-// end::selectAddress[]
 // tag::convert[]
-=== Converts your balance in a desired currency: `convert` or `cv` [Since v1.4]
->>>>>>> upstream/master
+=== Converts your balance in a desired currency: `convert` or `cv` [Since v1.4]`
 
 Converts an entries certain balance in a currency of your choice.
 Format: `convert` INDEX FROM_CURRENCY TO_CURRENCY` or `cv` INDEX FROM_CURRENCY TO_CURRENCY
 
 Example: `convert 2 USD JPY`
 Example: `convert 1 SGD USD`
-
-<<<<<<< HEAD
-
-=== Delete an Existing Item : `itemdelete` or `id` [Since v1.5rc]
-
-Deleting an item from a specified person. +
-Format: `itemdelete PERSON_INDEX ITEM_INDEX` or `id PERSON_INDEX ITEM_INDEX`
-
-****
-* The index of person refers to the one shown in the most recent listing.
-* The index of item refers to the one shown in the `itemshow` result.
-* The indices *must be a positive integer* `1, 2, 3, ...`
-****
-
-Examples:
-
-=======
 // end::convert[]
-// tag::item[]
-=== Delete an Existing Item : `itemdelete` or `id` [Since v1.5rc]
 
-Deleting an item from a specified person. +
-Format: `itemdelete PERSON_INDEX ITEM_INDEX` or `id PERSON_INDEX ITEM_INDEX`
-
-****
-* The index of person refers to the one shown in the most recent listing.
-* The index of item refers to the one shown in the `itemshow` result.
-* The indices *must be a positive integer* `1, 2, 3, ...`
-****
-
-Examples:
-
->>>>>>> upstream/master
-* `itemdelete 1 2`
-* This deletes the second item from the first person in the contact list.
-// end::item[]
 // tag::guiColorTag[]
 === All similar tags now have a unique color [Since v1.5rc]
 
-All similar tags found in TravelBanker now have a color specific to it.
+All similar tags found in TravelBanker now have a color specific to it. Tags can be used to associate
+currencies to amounts owed by contacts.
 // end::guiColorTag[]
 
 // tag::searchTag[]
 === List of all contacts with a specific tag [Since v1.5rc]
 
-User can have a list of all contacts that contain the specified tags.
+User can have a list of all contacts that contain the specified tags. This enables various filtering abilities (e.g.
+display only contacts that are friends. Display only contacts which owe you in SGD.) A contact must contain
+all the selected tags to be picked.
 Example: `searchtag t/friends`
 Example: `st t/colleagues t/friends`
 // end::searchTag[]
 
+// tag::dataencryption[]
 === Encrypting data files `[coming in v2.0]`
 
 _{explain how the user can enable/disable data encryption}_
 // end::dataencryption[]
 
+// tag::interest[]
 === Applies an interest rate to your balance: `interest FACTOR` or `i FACTOR` [Coming in v2.0]
 
 Displays your balance with an applied interest rate.
 Format: `interest FACTOR` or `i FACTOR`
-
-=== Lists a description of the debts someone owes you: `describe` or `db` [Coming in v2.0]
-
-Lists the description consisting of keywords that explain why someone owes you an amount.
-This facilitates understanding of the debt.
-Format: `describe INDEX`
+// end::interest[]
 
 // tag::transaction[]
 === Report a transaction and automatically update a contact's balance accordingly: `transaction` or `t` [Since v1.5rc]
@@ -556,7 +492,6 @@ Format : `transaction INDEX TRANSACTION_AMOUNT`
 Each contact will have a [DESTINATION] field to keep track of where a transaction between the
 user and the contact took place.
 Format: `trip [DESTINATION]`
-
 // end::trip[]
 
 // tag::colorTag[]
@@ -565,6 +500,7 @@ Format: `trip [DESTINATION]`
 The user can select the color he wants a specific tag to be.
 Format: `colortag c/COLOR t/TAGS` or `ct c/COLOR t/TAGS`
 // end::colorTag[]
+
 
 =======
 
@@ -581,9 +517,7 @@ e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 123466
 * *Clear* : `clear`
 * *Delete* : `delete INDEX` +
 e.g. `delete 3`
-// tag::balance[]
 * *Balance* : `balance`
-// end::balance[]
 * *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
 e.g. `edit 2 n/James Lee e/jameslee@example.com`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
@@ -593,27 +527,21 @@ e.g. `find James Jake`
 * *Select* : `select INDEX` +
 e.g.`select 2`
 * *History* : `history`
-// tag::map[]
 * *Map*: `map`
-// end::map[]
 * *Undo* : `undo`
 * *Redo* : `redo`
 // tag::removetag[]
 * *RemoveTag* : `removetag INDEX [t/TAG]...`
 // end::removetag[]
-// tag::searchTag[]
 * *SearchTag* : `searchtag t/TAG`
 e.g. `searchtag t/classmates t/friends`
-// end::searchTag[]
 * *Sort* : `sort KEYWORD_PREFIX/ORDER`
 * *Split* : `split INDEX1 [INDEX2...] m/MONEY`
 * *ItemShow* : `itemshow INDEX`
 * *ItemAdd* : `itemadd INDEX n/ITEM_NAME m/MONEY`
 * *ItemDelete* : `itemdelete PERSON_INDEX ITEM_INDEX`
 * *MaxLent* : `maxlent` or `ml`
-// tag::min[]
 * *MaxBorrowed* : `maxborrowed` or `mb`
-// end::min[]
 * *Currency* : `currency c/`
 e.g. `currency c/USD`
 
