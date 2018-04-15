@@ -219,7 +219,7 @@ public class ParserUtil {
     public static Money parseMoney(String money) throws IllegalValueException {
         requireNonNull(money);
         String trimmedMoney = money.trim();
-        if (!Money.isValidMoney(trimmedMoney)) {
+        if (!Money.isValidMoney(trimmedMoney) || !Money.isNumberLowEnough(money)) {
             throw new IllegalValueException(Money.MESSAGE_MONEY_CONSTRAINTS);
         }
         return new Money(trimmedMoney);
