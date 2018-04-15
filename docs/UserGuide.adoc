@@ -347,6 +347,10 @@ Displays a search for the nearest ATM in the browser panel. The map will launch 
 opening the app. If the browser panel displays something different, simply type `map` to view the
 search once more.
 Format: `map` or `mp`
+
+[NOTE]
+This feature relies on internet connectivity. Please make sure you have a working internet connection
+to ensure proper connectivity.
 // end::map[]
 
 === Settling up your balance with a contact: `settle` or `stl`[Since v1.3]
@@ -430,6 +434,10 @@ once more, refer to `map` command.
 Format : `select INDEX`
 Format : `maxborrowed`
 Format : `maxlent`
+
+[NOTE]
+This feature relies on internet connectivity. Please make sure you have a working internet connection
+to ensure proper functionality.
 // end::selectAddress[]
 
 // tag::convert[]
