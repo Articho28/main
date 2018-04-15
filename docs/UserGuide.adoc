@@ -294,7 +294,7 @@ Format: `maxlent` or `ml`
 // tag::min[]
 === Seeing which contact owes you the least: `maxborrowed` or `mb`[Since v1.2]
 
-Lists the contact to which you owe the most money. A message appears if user does not have any debts  +
+Selects the contact to which you owe the most money. A message appears if user does not have any debts  +
 Format: `maxborrowed` or `mb`
 // end::min[]
 
