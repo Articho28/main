@@ -220,7 +220,7 @@ public class ParserUtil {
         requireNonNull(money);
         String trimmedMoney = money.trim();
         if (!Money.isValidMoney(trimmedMoney)) {
-            throw new IllegalValueException(Email.MESSAGE_EMAIL_CONSTRAINTS);
+            throw new IllegalValueException(Money.MESSAGE_MONEY_CONSTRAINTS);
         }
         return new Money(trimmedMoney);
     }
