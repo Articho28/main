@@ -47,7 +47,6 @@ public class CurrencyCommandParser implements Parser<CurrencyCommand> {
             if (fromFormattedCurrency == null || toFormattedCurrency == null) {
                 throw new ParseException(CurrencyCommand.MESSAGE_CURRENCY_NOT_SUPPORTED);
             }
-            //@@author
             return new CurrencyCommand(currencyIndex, fromCurrency, toCurrency);
         } catch (IllegalValueException ive) {
             throw new ParseException(
