@@ -82,7 +82,9 @@ public class SettleCommand extends UndoableCommand {
      */
     private static Person getSettledPerson(Person personToEdit) throws CommandException {
         assert personToEdit != null;
-        if (personToEdit.getMoney().balance == 0) throw new CommandException(MESSAGE_ALREADY_SETTLED);
+        if (personToEdit.getMoney().balance == 0) {
+            throw new CommandException(MESSAGE_ALREADY_SETTLED);
+        }
 
         Name name = personToEdit.getName();
         Phone phone = personToEdit.getPhone();
